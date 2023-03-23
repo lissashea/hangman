@@ -6,14 +6,14 @@ let correctGuesses = [];
 let wrongGuesses = [];
 let maxWrongGuesses = 6;
 let gameFinished = false;
+let currentStep = 0;
 
 // DOM elements
 const wordElement = document.getElementById("word");
 const lettersElement = document.getElementById("letters");
 const guessesElement = document.getElementById("guesses");
 const resultElement = document.getElementById("result");
-
-
+const hangmanElement = document.getElementById("hangman");
 
 // Event listener for letter buttons
 lettersElement.addEventListener("click", event => {
@@ -28,6 +28,7 @@ lettersElement.addEventListener("click", event => {
       }
     } else {
       wrongGuesses.push(letter);
+      currentStep++;
       showGuesses();
       if (wrongGuesses.length === maxWrongGuesses) {
         endGame(false);
@@ -36,19 +37,12 @@ lettersElement.addEventListener("click", event => {
   }
 });
 
-//function start a new game
 function newGame() {
-//reset variables
-  guesses = []
-  correctGuesses = []
-  wrongGuesses = []
+  guesses = [];
+  correctGuesses = [];
+  wrongGuesses = [];
+  currentStep = 0;
   gameFinished = false;
 
-//get word from user input
-  word = prompt("enter your guess word");
-    if (!word) {
-      return;
-    }
-    wordArray = wordtoUpperCase().split("")
+  
 }
-

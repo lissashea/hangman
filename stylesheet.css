@@ -28,3 +28,13 @@ h1 {
   border-radius: 5px;
   cursor: pointer;
 }
+
+#guesses {
+  margin-bottom: 20px;
+}
+
+#result {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
