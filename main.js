@@ -36,3 +36,12 @@ lettersElement.addEventListener("click", event => {
   }
 });
 
+//function start a new game
+function newGame() {
+//reset variables
+  guesses = []
+  correctGuesses = []
+  wrongGuesses = []
+  gameFinished = false;
+
+}
