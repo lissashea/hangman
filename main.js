@@ -44,4 +44,11 @@ function newGame() {
   wrongGuesses = []
   gameFinished = false;
 
+//get word from user input
+  word = prompt("enter your guess word");
+    if (!word) {
+      return;
+    }
+    wordArray = wordtoUpperCase().split("")
 }
+
