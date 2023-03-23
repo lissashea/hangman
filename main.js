@@ -44,5 +44,10 @@ function newGame() {
   currentStep = 0;
   gameFinished = false;
 
+  word = prompt("Enter a word to guess:");
+    if (!word) {
+      return;
+    }
+    wordArray = word.toUpperCase().split("");
   
 }
