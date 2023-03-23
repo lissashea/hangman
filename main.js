@@ -59,4 +59,19 @@ function newGame() {
       button.textContent = letter;
       lettersElement.appendChild(button);
     }
+
+
+  function showWord() {
+
+  }
+
+  function showGuesses() {
+
+  }
+
+  function endGame(win) {
+    gameFinished = true;
+  }
 }
+
+newGame();
