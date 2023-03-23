@@ -1,4 +1,4 @@
-// Initialize variables
+//variables
 let word;
 let wordArray;
 let guesses = [];
@@ -8,14 +8,14 @@ let maxWrongGuesses = 6;
 let gameFinished = false;
 let currentStep = 0;
 
-// DOM elements
+//get my dom read to rock
 const wordElement = document.getElementById("word");
 const lettersElement = document.getElementById("letters");
 const guessesElement = document.getElementById("guesses");
 const resultElement = document.getElementById("result");
 const hangmanElement = document.getElementById("hangman");
 
-// Event listener for letter buttons
+// when i have my letters ready when need them to click 
 lettersElement.addEventListener("click", event => {
   if (event.target.tagName === "BUTTON" && !gameFinished) {
     const letter = event.target.textContent;
@@ -49,5 +49,14 @@ function newGame() {
       return;
     }
     wordArray = word.toUpperCase().split("");
-  
+
+    showWord();
+
+    lettersElement.innerHTML = "";
+    for (let i = 65; i <= 90; i++) {
+      const letter = String.fromCharCode(i);
+      const button = document.createElement("button");
+      button.textContent = letter;
+      lettersElement.appendChild(button);
+    }
 }
