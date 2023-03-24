@@ -38,15 +38,17 @@ function newGame() {
       const button = document.createElement("button");
       button.textContent = letter;
       lettersElement.appendChild(button);
+      
       button.addEventListener('click', () => {
         if (gameFinished) {
           return;
         }
-        if (guesses.includes(button.innerHTML)) {
-          return;
-        }
-        guesses.push(button.innerHTML);
+        guesses.push(button.innerHTML)
+        // if (guesses.includes(button.innerHTML)) {
+        //   ;
+        // }
         button.classList.add('active');
+        button.setAttribute('style', 'background-color: grey' )
         if (wordArray.includes(button.innerHTML)) {
           for (let i = 0; i < wordArray.length; i++) {
             if (wordArray[i] === button.innerHTML) {
@@ -59,10 +61,13 @@ function newGame() {
         }
         showWord();
         showGuesses();
+       if (currentStep === 6) {
         endGame();
+       }
+        console.log(currentStep)
       })
     }
-}
+  }
 newGame()
 
 function showWord() {
@@ -71,14 +76,10 @@ function showWord() {
     if (correctGuesses.includes(wordArray[i])) {
       displayedWord += wordArray[i] + "";
     } else {
-      displayedWord += "_"
+      displayedWord += " _ "
     }
   }
   wordElement.innerHTML = displayedWord.trim();
-}
-
-function showGuesses() {
-  guessesElement.innerHTML = ' incorrect guesses ' + wrongGuesses.join(", ");
 }
 
 function showGuesses() {
@@ -86,8 +87,6 @@ function showGuesses() {
 }
 
 
-// function endGame(win) {
-
-gameFinished = true;
-}
-
+function endGame() {
+  gameFinished = true
+  }
