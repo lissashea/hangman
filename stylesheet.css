@@ -1,9 +1,15 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;  
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 h1 {
   text-align: center;
+  padding-top: 100px;
+  padding-bottom: 125px;
 }
 
 #word {
