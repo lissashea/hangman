@@ -15,6 +15,7 @@ const lettersElement = document.getElementById("letters");
 const guessesElement = document.getElementById("guesses");
 const resultElement = document.getElementById("result");
 const hangmanElement = document.getElementById("hangman");
+const clueElement = document.getElementById("clue")
 
 async function getRandomWord(){
   console.log("Fetching random word...");
