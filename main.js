@@ -42,7 +42,6 @@ async function newGame() {
 
     lettersElement.innerHTML = "";
     for (let i = 65; i <= 90; i++) {
-      //from charcode The String.fromCharCode() static method returns a string created from the specified sequence of UTF-16 code units.
       const letter = String.fromCharCode(i);
       const button = document.createElement("button");
       button.textContent = letter;
@@ -53,21 +52,20 @@ async function newGame() {
           return;
         }
         guesses.push(button.innerHTML)
-        // if (guesses.includes(button.innerHTML)) {
-        //   ;
-        // }
         button.classList.add('active');
         button.setAttribute('style', 'background-color: grey' )
-        if (wordArray.includes(button.innerHTML)) {
+        const selectedLetter = button.innerHTML.toLowerCase();
+        if (wordArray.includes(selectedLetter)) {
           for (let i = 0; i < wordArray.length; i++) {
-            if (wordArray[i] === button.innerHTML) {
-              correctGuesses.push(button.innerHTML)
+            if (wordArray[i] === selectedLetter) {
+          correctGuesses.push(selectedLetter)
             }
           }
         } else {
-          wrongGuesses.push(button.innerHTML);
-          currentStep++
+        wrongGuesses.push(selectedLetter);
+        currentStep++
         }
+
         showWord();
         showGuesses();
        if (currentStep === 6) {
