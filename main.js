@@ -39,33 +39,54 @@ function newGame() {
       button.textContent = letter;
       lettersElement.appendChild(button);
       button.addEventListener('click', () => {
-        for (let i = 0; i < wordArray.length; i++) {
-          if (wordArray[i] === button.innerHTML) {
-            currentStep ++
-            correctGuesses.push(button.innerHTML)
-            console.log(correctGuesses)
-          } else {
-            wrongGuesses.push(button.innerHTML);
-            button.classList.remove('active')
-          }
+        if (gameFinished) {
+          return;
         }
-    });
-  }
+        if (guesses.includes(button.innerHTML)) {
+          return;
+        }
+        guesses.push(button.innerHTML);
+        button.classList.add('active');
+        if (wordArray.includes(button.innerHTML)) {
+          for (let i = 0; i < wordArray.length; i++) {
+            if (wordArray[i] === button.innerHTML) {
+              correctGuesses.push(button.innerHTML)
+            }
+          }
+        } else {
+          wrongGuesses.push(button.innerHTML);
+          currentStep++
+        }
+        showWord();
+        showGuesses();
+        endGame();
+      })
+    }
 }
-
-showWord();
-
-newGame();
+newGame()
 
 function showWord() {
-
+  let displayedWord = "";
+  for (let i = 0; i < wordArray.length; i++) {
+    if (correctGuesses.includes(wordArray[i])) {
+      displayedWord += wordArray[i] + "";
+    } else {
+      displayedWord += "_"
+    }
+  }
+  wordElement.innerHTML = displayedWord.trim();
 }
 
 function showGuesses() {
-
+  guessesElement.innerHTML = ' incorrect guesses ' + wrongGuesses.join(", ");
 }
 
-function endGame(win) {
+function showGuesses() {
+  guessesElement.innerHTML = "Incorrect guesses: " + wrongGuesses.join(", ");
+}
+
+
+// function endGame(win) {
 
 gameFinished = true;
 }
