@@ -133,7 +133,6 @@ canvas {
 }
 
 
-
 @media only screen and (max-width: 600px) {
   .new-game-popup {
     display: none;

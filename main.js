@@ -1,8 +1,3 @@
-window.addEventListener("load", () => {
-  resetGame();
-});
-
-
 //variables
 let word;
 let guesses = [];
@@ -43,10 +38,10 @@ clueButton.style.display = "none";
 hintButton.style.display = "none";
 
 startButton.addEventListener("click", () => {
+  newGame();
   clueButton.style.display = "block";
   hintButton.style.display = "block";
   startButton.style.display = "none";
-  newGame();
 });
 
 async function getRandomWord(){
@@ -103,12 +98,12 @@ async function newGame() {
       }
       guesses.push(button.innerHTML)
       button.classList.add('active');
-      button.setAttribute('style', 'background-color: grey' )
+      button.setAttribute('style', 'background-color: grey');
       const selectedLetter = button.innerHTML.toLowerCase();
       if (wordArray.includes(selectedLetter)) {
         for (let i = 0; i < wordArray.length; i++) {
           if (wordArray[i] === selectedLetter) {
-            correctGuesses.push(selectedLetter)
+            correctGuesses.push(selectedLetter);
           }
         }
       } else {
@@ -116,121 +111,128 @@ async function newGame() {
         currentStep++;
         drawMan(currentStep);
       }
-
+    
       showWord();
       showGuesses();
       if (currentStep === 6) {
         endGame();
       }
-      console.log(currentStep)
-    })
+    });
   }
 }
 
 function showWord() {
-  let displayedWord = "";
-  for (let i = 0; i < wordArray.length; i++) {
-    if (correctGuesses.includes(wordArray[i])) {
-      displayedWord += wordArray[i] + "";
-    } else {
-      displayedWord += " _ "
-    }
-  }
-  wordElement.innerHTML = displayedWord.trim();
+let displayedWord = "";
+for (let i = 0; i < wordArray.length; i++) {
+if (correctGuesses.includes(wordArray[i])) {
+displayedWord += wordArray[i] + "";
+} else {
+displayedWord += " _ ";
 }
-
+}
+wordElement.innerHTML = displayedWord.trim();
+}
 
 function showGuesses() {
-  guessesElement.innerHTML = "Incorrect guesses: " + wrongGuesses.join(", ");
+guessesElement.innerHTML = "Incorrect guesses: " + wrongGuesses.join(", ");
 }
 
-
 function endGame() {
-  gameFinished = true
+gameFinished = true;
+const resultMessage =
+correctGuesses.length === wordArray.length
+? "You won!"
+: "You lost. The word was " + word + ".";
+resultElement.innerHTML = resultMessage;
 }
 
 function resetGame() {
-  guesses = [];
-  correctGuesses = [];
-  wrongGuesses = [];
-  currentStep = 0;
-  gameFinished = false;
-  word = null;
-  wordArray = null;
-  wordDefinition = null;
-  resultElement.innerHTML = "";
-  canvasElement.getContext("2d").clearRect(0, 0, canvasElement.width, canvasElement.height);
-  lettersElement.innerHTML = "";
-  clueButton.style.display = "none";
-  hintButton.style.display = "none";
-  startButton.style.display = "block";
-  wordElement.innerHTML = "";
-  guessesElement.innerHTML = "";
+guesses = [];
+correctGuesses = [];
+wrongGuesses = [];
+currentStep = 0;
+gameFinished = false;
+word = null;
+wordArray = null;
+wordDefinition = null;
+resultElement.innerHTML = "";
+canvasElement.getContext("2d").clearRect(0, 0, canvasElement.width, canvasElement.height);
+lettersElement.innerHTML = "";
+clueButton.style.display = "none";
+hintButton.style.display = "none";
+startButton.style.display = "block";
+wordElement.innerHTML = "";
+guessesElement.innerHTML = "";
 }
 
 clueButton.addEventListener("click", async () => {
-  const wordDefinition = await getDefinition();
-  alert(`Clue: ${wordDefinition.definition}`);
-  clueButton.style.display = "none";
+const wordDefinition = await getDefinition();
+alert(`Clue: ${wordDefinition.definition}`);
+clueButton.style.display = "none";
 });
 
 hintButton.addEventListener("click", async () => {
-  const wordDefinition = await getDefinition();
-  alert(`Hint: ${wordDefinition.partOfSpeech}`);
-  hintButton.style.display = "none";
+const wordDefinition = await getDefinition();
+alert(`Hint: ${wordDefinition.partOfSpeech}`);
+hintButton.style.display = "none";
 });
 
 function drawMan(currentStep) {
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
-
+  
   ctx.lineWidth = 2;
   ctx.strokeStyle = 'black';
-
+  
   if (currentStep >= 1) {
-    // Draw the head
-    ctx.beginPath();
-    ctx.arc(50, 25, 15, 0, 2 * Math.PI);
-    ctx.stroke();
+  // Draw the head
+  ctx.beginPath();
+  ctx.arc(50, 25, 15, 0, 2 * Math.PI);
+  ctx.stroke();
   }
-
+  
   if (currentStep >= 2) {
-    // Draw the body
-    ctx.beginPath();
-    ctx.moveTo(50, 40);
-    ctx.lineTo(50, 90);
-    ctx.stroke();
+  // Draw the body
+  ctx.beginPath();
+  ctx.moveTo(50, 40);
+  ctx.lineTo(50, 90);
+  ctx.stroke();
   }
-
+  
   if (currentStep >= 3) {
-    // Draw the left arm
-    ctx.beginPath();
-    ctx.moveTo(50, 50);
-    ctx.lineTo(30, 70);
-    ctx.stroke();
+  // Draw the left arm
+  ctx.beginPath();
+  ctx.moveTo(50, 50);
+  ctx.lineTo(30, 70);
+  ctx.stroke();
   }
-
+  
   if (currentStep >= 4) {
-    // Draw the right arm
-    ctx.beginPath();
-    ctx.moveTo(50, 50);
-    ctx.lineTo(70, 70);
-    ctx.stroke();
+  // Draw the right arm
+  ctx.beginPath();
+  ctx.moveTo(50, 50);
+  ctx.lineTo(70, 70);
+  ctx.stroke();
   }
-
+  
   if (currentStep >= 5) {
-    // Draw the left leg
-    ctx.beginPath();
-    ctx.moveTo(50, 90);
-    ctx.lineTo(30, 110);
-    ctx.stroke();
+  // Draw the left leg
+  ctx.beginPath();
+  ctx.moveTo(50, 90);
+  ctx.lineTo(30, 110);
+  ctx.stroke();
   }
-
+  
   if (currentStep >= 6) {
     // Draw the right leg
     ctx.beginPath();
     ctx.moveTo(50, 90);
     ctx.lineTo(70, 110);
     ctx.stroke();
+  
+    // // Draw the right foot
+    // ctx.beginPath();
+    // ctx.arc(70, 110, 5, 0, 2 * Math.PI);
+    // ctx.stroke();
   }
-}
+}  
