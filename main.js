@@ -129,6 +129,32 @@ const canvasCreater = () => {
     drawLine(70,40, 70, 80);
   }
 
+  const leftArm = () => {
+    drawLine(70,50,50,70)
+  }
+
+  const rightArm = () => {
+    drawLine(70,50,90,70);
+  }
+
+  const leftLeg = () => {
+    drawLine(70,80,50,110);
+  }
+
+  const rightLeg = () => {
+    drawLine(70,80,90,110);
+  }
+
+  const InitialDrawing = () => {
+    context.clearRect(0,0,context.canvas.width, context.canvas.height);
+    drawLine(10,130,130,130);
+    drawLine(10,10,10,131);
+    drawLine(10,10,70,10);
+    drawLine(70,10,70,20);
+  };
+
+  return {InitialDrawing, head, body, leftArm, rightArm, leftLeg, rightLeg};
+
 }
 
 
