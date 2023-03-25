@@ -57,26 +57,26 @@ function addData(object) {
   data.push(object)
 }
 
-
 async function getDefinition(randomWord) {
   const res = await fetch(
     `https://api.dictionaryapi.dev/api/v2/entries/en/${randomWord}`
   );
-  const dictionaryPull = await res.json();
 
-  if (dictionaryPull.length === 0) {
-    return null; // if the word is not found, return null
+  if (res.ok) { // Check if response is successful
+    const data = await res.json();
+    if (data.length > 0 && data[0].meanings && data[0].meanings.length > 0 && data[0].meanings[0].definitions && data[0].meanings[0].definitions.length > 0) { // Check if the data has the expected structure
+      const definition = data[0].meanings[0].definitions[0].definition;
+      const partOfSpeech = data[0].meanings[0].partOfSpeech;
+
+      return {
+        definition: definition,
+        partOfSpeech: partOfSpeech,
+      };
+    }
   }
 
-  const definition = dictionaryPull[0].meanings[0].definitions[0].definition;
-  const partOfSpeech = dictionaryPull[0].meanings[0].partOfSpeech;
-
-  return {
-    definition: definition,
-    partOfSpeech: partOfSpeech,
-  };
+  return null;
 }
-
 
 async function newGame() {
   resetGame();
@@ -167,13 +167,20 @@ guessesElement.innerHTML = "Incorrect guesses: " + wrongGuesses.join(", ");
 }
 
 function endGame() {
-gameFinished = true;
-const resultMessage =
-correctGuesses.length === wordArray.length
-? "You won!"
-: "You lost. The word was " + word + ".";
-resultElement.innerHTML = resultMessage;
+  gameFinished = true;
+  const resultMessage =
+    correctGuesses.length === wordArray.length
+      ? "You won!"
+      : "You lost. The word was " + word + ".";
+  resultElement.innerHTML = resultMessage;
+
+  setTimeout(() => {
+    resetGame();
+    startButton.style.display = "block";
+  }, 5000);
 }
+
+
 
 function resetGame() {
 guesses = [];
