@@ -108,6 +108,27 @@ canvas {
   font-weight: 600;
 }
 
+#clueButton,
+#hintButton,
+#startButton {
+  font-family: SimpleHandMade;
+  font-size: 18px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  padding: 10px;
+  color: grey;
+}
+
+#clueButton:hover,
+#hintButton:hover,
+#startButton:hover {
+  background-color: lightgrey;
+}
+
+
 @media only screen and (max-width: 600px) {
   .new-game-popup {
     display: none;

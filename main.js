@@ -20,6 +20,7 @@ const canvasElement = document.getElementById("canvas")
 const resultText = document.getElementById("result-text");
 const clueButton = document.createElement("button");
 const hintButton = document.createElement("button");
+const startButton = document.createElement("button");
 
 clueButton.textContent = "Clue";
 clueButton.id = "clueButton";
@@ -27,7 +28,13 @@ hintButton.textContent = "Hint";
 hintButton.id = "hintButton";
 clueElement.appendChild(clueButton);
 clueElement.appendChild(hintButton);
+startButton.textContent = "Start Game";
+startButton.id = "startButton";
+document.body.appendChild(startButton);
 
+startButton.addEventListener("click", () => {
+  newGame();
+});
 
 
 async function getRandomWord(){
