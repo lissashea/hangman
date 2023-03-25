@@ -58,16 +58,25 @@ function addData(object) {
 }
 
 
-async function getDefinition() {
+async function getDefinition(randomWord) {
   const res = await fetch(
-    `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+    `https://api.dictionaryapi.dev/api/v2/entries/en/${randomWord}`
   );
   const dictionaryPull = await res.json();
+
+  if (dictionaryPull.length === 0) {
+    return null; // if the word is not found, return null
+  }
+
+  const definition = dictionaryPull[0].meanings[0].definitions[0].definition;
+  const partOfSpeech = dictionaryPull[0].meanings[0].partOfSpeech;
+
   return {
-    definition: dictionaryPull[0].meanings[0].definitions[0].definition,
-    partOfSpeech: dictionaryPull[0].meanings[0].partOfSpeech,
+    definition: definition,
+    partOfSpeech: partOfSpeech,
   };
 }
+
 
 async function newGame() {
   resetGame();
@@ -76,11 +85,18 @@ async function newGame() {
   wrongGuesses = [];
   currentStep = 0;
   gameFinished = false;
-  const randomWord = await getRandomWord();
-  word = randomWord;
-  console.log(word);
-  wordDefinition = await getDefinition();
-  console.log(wordDefinition)
+  let randomWord = "";
+  while (true) {
+    randomWord = await getRandomWord();
+    console.log(randomWord);
+    const definition = await getDefinition(randomWord);
+    if (definition) {
+      word = randomWord;
+      wordDefinition = definition;
+      break;
+    }
+  }
+  console.log(word, wordDefinition);
 
   wordArray = word.split("");
   console.log(word)
@@ -120,6 +136,19 @@ async function newGame() {
     });
   }
 }
+
+
+clueButton.addEventListener("click", async () => {
+  const wordDefinition = await getDefinition(word);
+  alert(`Clue: ${wordDefinition.definition}`);
+  clueButton.style.display = "none";
+  });
+  
+  hintButton.addEventListener("click", async () => {
+  const wordDefinition = await getDefinition(word);
+  alert(`Hint: ${wordDefinition.partOfSpeech}`);
+  hintButton.style.display = "none";
+  });
 
 function showWord() {
 let displayedWord = "";
@@ -165,17 +194,6 @@ wordElement.innerHTML = "";
 guessesElement.innerHTML = "";
 }
 
-clueButton.addEventListener("click", async () => {
-const wordDefinition = await getDefinition();
-alert(`Clue: ${wordDefinition.definition}`);
-clueButton.style.display = "none";
-});
-
-hintButton.addEventListener("click", async () => {
-const wordDefinition = await getDefinition();
-alert(`Hint: ${wordDefinition.partOfSpeech}`);
-hintButton.style.display = "none";
-});
 
 function drawMan(currentStep) {
   const canvas = document.getElementById('canvas');
