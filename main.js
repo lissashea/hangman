@@ -100,5 +100,10 @@ function endGame() {
   gameFinished = true
 }
 
+function drawMan(count) {
+  //head body, left arm, right arm, left leg, right leg
+
+  }
+
 
 
