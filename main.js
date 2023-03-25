@@ -62,19 +62,21 @@ async function getDefinition(randomWord) {
   const res = await fetch(
     `https://api.dictionaryapi.dev/api/v2/entries/en/${randomWord}`
   );
-  const dictionaryPull = await res.json();
 
-  if (dictionaryPull.length === 0) {
-    return null; // if the word is not found, return null
+  if (res.ok) { // Check if response is successful
+    const data = await res.json();
+    if (data.length > 0 && data[0].meanings && data[0].meanings.length > 0 && data[0].meanings[0].definitions && data[0].meanings[0].definitions.length > 0) { // Check if the data has the expected structure
+      const definition = data[0].meanings[0].definitions[0].definition;
+      const partOfSpeech = data[0].meanings[0].partOfSpeech;
+
+      return {
+        definition: definition,
+        partOfSpeech: partOfSpeech,
+      };
+    }
   }
 
-  const definition = dictionaryPull[0].meanings[0].definitions[0].definition;
-  const partOfSpeech = dictionaryPull[0].meanings[0].partOfSpeech;
-
-  return {
-    definition: definition,
-    partOfSpeech: partOfSpeech,
-  };
+  return null;
 }
 
 
@@ -176,23 +178,45 @@ resultElement.innerHTML = resultMessage;
 }
 
 function resetGame() {
-guesses = [];
-correctGuesses = [];
-wrongGuesses = [];
-currentStep = 0;
-gameFinished = false;
-word = null;
-wordArray = null;
-wordDefinition = null;
-resultElement.innerHTML = "";
-canvasElement.getContext("2d").clearRect(0, 0, canvasElement.width, canvasElement.height);
-lettersElement.innerHTML = "";
-clueButton.style.display = "none";
-hintButton.style.display = "none";
-startButton.style.display = "block";
-wordElement.innerHTML = "";
-guessesElement.innerHTML = "";
+  // Reset all game variables
+  word = null;
+  guesses = [];
+  correctGuesses = [];
+  wrongGuesses = [];
+  maxWrongGuesses = 6;
+  currentStep = 0;
+  gameFinished = false;
+  wordDefinition = null;
+  
+  // Clear canvas
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Reset HTML elements
+  wordElement.innerHTML = "";
+  guessesElement.innerHTML = "";
+  resultElement.innerHTML = "";
+  lettersElement.innerHTML = "";
+  clueButton.style.display = "none";
+  hintButton.style.display = "none";
+  startButton.style.display = "block";
 }
+
+function endGame() {
+  gameFinished = true;
+  const resultMessage =
+    correctGuesses.length === wordArray.length
+      ? "You won!"
+      : "You lost. The word was " + word + ".";
+  resultElement.innerHTML = resultMessage;
+
+  setTimeout(() => {
+    resetGame();
+    startButton.style.display = "block";
+  }, 1000);
+}
+
 
 
 function drawMan(currentStep) {

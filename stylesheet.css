@@ -4,13 +4,19 @@
   font-weight: normal;
   font-style: normal;
 }
+/* 
+body {
+  height: 100vh;
+  width: 100vw;
+} */
 
 .game-container {
   border: solid darkgrey 2px;
   margin: auto;
   display: flex;
   box-sizing: border-box;
-  height: 98vh;
+  /* height: 100vh; */
+  width: 100vw;
   flex-direction: column;
   background-color: lightpink;
   font-family: SimpleHandMade;
@@ -22,8 +28,9 @@
 
 h1 {
   text-align: center;
-  padding-top: 20px;
-  padding-bottom: 25px;
+  /* padding-top: 20px; */
+  font-family: SimpleHandMade;
+  /* padding-bottom: 25px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,7 +77,7 @@ h1 {
 @media only screen and (max-width: 600px) {
   #letters {
     flex-wrap: wrap;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
   }
 }
@@ -78,7 +85,7 @@ h1 {
 /* Set a max-width for the word container and use a responsive font size */
 
 canvas {
-  border: solid darkgrey 10px;
+  /* border: solid darkgrey 10px; */
   padding-bottom: 20px;
   /* margin-bottom: 20px; */
   max-width: 100%;
@@ -132,9 +139,3 @@ canvas {
   background-color: lightgrey;
 }
 
-
-@media only screen and (max-width: 600px) {
-  .new-game-popup {
-    display: none;
-  }
-}
