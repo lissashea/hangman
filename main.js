@@ -17,6 +17,7 @@ const resultElement = document.getElementById("result");
 const hangmanElement = document.getElementById("hangman");
 const clueElement = document.getElementById("clue")
 const canvasElement = document.getElementById("canvas")
+const resultText = document.getElementById("result-text");
 
 async function getRandomWord(){
   console.log("Fetching random word...");
@@ -101,61 +102,87 @@ function endGame() {
   gameFinished = true
 }
 
-function drawMan(count) {
-  if (currentStep == 6) {
-    resultElement.textContent.innerHTML = `<h2 class='lose-mesg>Game OVer!</h2><p>The word was<span>${word}</span></p>`;
-  }
-}
 
-const canvasCreater = () => {
-  let context = canvas.getContext("2d");
-  context.beginPath();
-  context.strokeStyle = "#000";
-  context.lineWidth = 2;
+// function drawMan(currentStep) {
+//   if (currentStep == 6) {
+//     resultElement.textContent.innerHTML = `<h2 class='lose-mesg>Game OVer!</h2><p>The word was<span>${word}</span></p>`;
+//   }
+// }
 
-  const drawLine = (fromX, fromY,toX,toY) => {
-    context.moveTo(fromX,fromY);
-    context.lineTo(toX, toY);
+// displayOptions();
 
-  }
+// const canvasCreater = () => {
+//   let context = canvas.getContext("2d");
+//   context.beginPath();
+//   context.strokeStyle = "#000";
+//   context.lineWidth = 2;
 
-  const head = () => {
-    context.beginPath();
-    context.arc(70,30,10,0,Math.PI * 2, true);
-    context.stroke();
-  }
+//   const drawLine = (fromX, fromY,toX,toY) => {
+//     context.moveTo(fromX,fromY);
+//     context.lineTo(toX, toY);
 
-  const body = () => {
-    drawLine(70,40, 70, 80);
-  }
+//   }
 
-  const leftArm = () => {
-    drawLine(70,50,50,70)
-  }
+//   const head = () => {
+//     context.beginPath();
+//     context.arc(70,30,10,0,Math.PI * 2, true);
+//     context.stroke();
+//   }
 
-  const rightArm = () => {
-    drawLine(70,50,90,70);
-  }
+//   const body = () => {
+//     drawLine(70,40, 70, 80);
+//   }
 
-  const leftLeg = () => {
-    drawLine(70,80,50,110);
-  }
+//   const leftArm = () => {
+//     drawLine(70,50,50,70)
+//   }
 
-  const rightLeg = () => {
-    drawLine(70,80,90,110);
-  }
+//   const rightArm = () => {
+//     drawLine(70,50,90,70);
+//   }
 
-  const InitialDrawing = () => {
-    context.clearRect(0,0,context.canvas.width, context.canvas.height);
-    drawLine(10,130,130,130);
-    drawLine(10,10,10,131);
-    drawLine(10,10,70,10);
-    drawLine(70,10,70,20);
-  };
+//   const leftLeg = () => {
+//     drawLine(70,80,50,110);
+//   }
 
-  return {InitialDrawing, head, body, leftArm, rightArm, leftLeg, rightLeg};
+//   const rightLeg = () => {
+//     drawLine(70,80,90,110);
+//   }
 
-}
+//   const InitialDrawing = () => {
+//     context.clearRect(0,0,context.canvas.width, context.canvas.height);
+//     drawLine(10,130,130,130);
+//     drawLine(10,10,10,131);
+//     drawLine(10,10,70,10);
+//     drawLine(70,10,70,20);
+//   };
 
+//   return {InitialDrawing, head, body, leftArm, rightArm, leftLeg, rightLeg};
 
+// }
 
+// const drawMan = (currentStep ) => {
+//   let { head, body, lefArm, rightArm, leftLeg, rightLeg } = canvasCreator() 
+//   switch(currentStep) {
+//     case 1: 
+//       head();
+//       break;
+//     case 2:
+//       body();
+//       break;
+//     case 3: 
+//       leftArm();
+//       break;
+//     case 4:
+//       rightArm();
+//       break;
+//     case 5: 
+//       rightLeg();
+//       break;
+//     case 6: 
+//       leftLeg();
+//       break;
+//     default:
+//       break;
+//   } 
+// }
