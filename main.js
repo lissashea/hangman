@@ -8,6 +8,7 @@ let maxWrongGuesses = 6;
 let gameFinished = false;
 let currentStep = 0;
 let data = []
+let wordDefinition;
 
 //get my dom read to rock
 const wordElement = document.getElementById("word");
@@ -21,6 +22,8 @@ const resultText = document.getElementById("result-text");
 const clueButton = document.createElement("button");
 const hintButton = document.createElement("button");
 const startButton = document.createElement("button");
+const gameContainer = document.getElementsByClassName("game-container")
+h1Element = document.querySelector("h1")
 
 clueButton.textContent = "Clue";
 clueButton.id = "clueButton";
@@ -30,12 +33,21 @@ clueElement.appendChild(clueButton);
 clueElement.appendChild(hintButton);
 startButton.textContent = "Start Game";
 startButton.id = "startButton";
-document.body.appendChild(startButton);
+h1Element.append(startButton);
+
+// window.addEventListener("load", () => {
+//   newGame();
+// });
+
+clueButton.style.display = "none";
+hintButton.style.display = "none";
 
 startButton.addEventListener("click", () => {
+  clueButton.style.display = "block";
+  hintButton.style.display = "block";
+  startButton.style.display = "none";
   newGame();
 });
-
 
 async function getRandomWord(){
   console.log("Fetching random word...");
@@ -72,8 +84,7 @@ async function newGame() {
   const randomWord = await getRandomWord();
   word = randomWord;
   console.log(word);
-
-  const wordDefinition = await getDefinition();
+  wordDefinition = await getDefinition();
   console.log(wordDefinition)
 
   wordArray = word.split("");
@@ -140,12 +151,14 @@ function endGame() {
 
 clueButton.addEventListener("click", async () => {
   const wordDefinition = await getDefinition();
-  clueElement.textContent = `Clue: ${wordDefinition.definition} (${wordDefinition.partOfSpeech})`;
+  alert(`Clue: ${wordDefinition.definition}`);
+  clueButton.style.display = "none";
 });
 
 hintButton.addEventListener("click", async () => {
   const wordDefinition = await getDefinition();
   alert(`Hint: ${wordDefinition.partOfSpeech}`);
+  hintButton.style.display = "none";
 });
 
 // function drawMan(currentStep) {
