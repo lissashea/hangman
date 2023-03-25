@@ -1,3 +1,7 @@
+window.addEventListener("load", () => {
+  resetGame();
+});
+
 
 //variables
 let word;
@@ -35,10 +39,6 @@ startButton.textContent = "Start Game";
 startButton.id = "startButton";
 h1Element.append(startButton);
 
-// window.addEventListener("load", () => {
-//   newGame();
-// });
-
 clueButton.style.display = "none";
 hintButton.style.display = "none";
 
@@ -74,8 +74,8 @@ async function getDefinition() {
   };
 }
 
-
 async function newGame() {
+  resetGame();
   guesses = [];
   correctGuesses = [];
   wrongGuesses = [];
@@ -126,7 +126,6 @@ async function newGame() {
     })
   }
 }
-newGame()
 
 function showWord() {
   let displayedWord = "";
@@ -148,6 +147,25 @@ function showGuesses() {
 
 function endGame() {
   gameFinished = true
+}
+
+function resetGame() {
+  guesses = [];
+  correctGuesses = [];
+  wrongGuesses = [];
+  currentStep = 0;
+  gameFinished = false;
+  word = null;
+  wordArray = null;
+  wordDefinition = null;
+  resultElement.innerHTML = "";
+  canvasElement.getContext("2d").clearRect(0, 0, canvasElement.width, canvasElement.height);
+  lettersElement.innerHTML = "";
+  clueButton.style.display = "none";
+  hintButton.style.display = "none";
+  startButton.style.display = "block";
+  wordElement.innerHTML = "";
+  guessesElement.innerHTML = "";
 }
 
 clueButton.addEventListener("click", async () => {
