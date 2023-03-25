@@ -90,41 +90,42 @@ async function newGame() {
   wordArray = word.split("");
   console.log(word)
 
-    lettersElement.innerHTML = "";
-    for (let i = 65; i <= 90; i++) {
-      const letter = String.fromCharCode(i);
-      const button = document.createElement("button");
-      button.textContent = letter;
-      lettersElement.appendChild(button);
-      
-      button.addEventListener('click', () => {
-        if (gameFinished) {
-          return;
-        }
-        guesses.push(button.innerHTML)
-        button.classList.add('active');
-        button.setAttribute('style', 'background-color: grey' )
-        const selectedLetter = button.innerHTML.toLowerCase();
-        if (wordArray.includes(selectedLetter)) {
-          for (let i = 0; i < wordArray.length; i++) {
-            if (wordArray[i] === selectedLetter) {
-          correctGuesses.push(selectedLetter)
-            }
-          }
-        } else {
-        wrongGuesses.push(selectedLetter);
-        currentStep++
-        }
+  lettersElement.innerHTML = "";
+  for (let i = 65; i <= 90; i++) {
+    const letter = String.fromCharCode(i);
+    const button = document.createElement("button");
+    button.textContent = letter;
+    lettersElement.appendChild(button);
 
-        showWord();
-        showGuesses();
-       if (currentStep === 6) {
+    button.addEventListener('click', () => {
+      if (gameFinished) {
+        return;
+      }
+      guesses.push(button.innerHTML)
+      button.classList.add('active');
+      button.setAttribute('style', 'background-color: grey' )
+      const selectedLetter = button.innerHTML.toLowerCase();
+      if (wordArray.includes(selectedLetter)) {
+        for (let i = 0; i < wordArray.length; i++) {
+          if (wordArray[i] === selectedLetter) {
+            correctGuesses.push(selectedLetter)
+          }
+        }
+      } else {
+        wrongGuesses.push(selectedLetter);
+        currentStep++;
+        drawMan(currentStep);
+      }
+
+      showWord();
+      showGuesses();
+      if (currentStep === 6) {
         endGame();
-       }
-        console.log(currentStep)
-      })
-    }
+      }
+      console.log(currentStep)
+    })
   }
+}
 newGame()
 
 function showWord() {
@@ -161,86 +162,57 @@ hintButton.addEventListener("click", async () => {
   hintButton.style.display = "none";
 });
 
-// function drawMan(currentStep) {
-//   if (currentStep == 6) {
-//     resultElement.textContent.innerHTML = `<h2 class='lose-mesg>Game OVer!</h2><p>The word was<span>${word}</span></p>`;
-//   }
-// }
+function drawMan(currentStep) {
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
 
-// displayOptions();
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = 'black';
 
-// const canvasCreater = () => {
-//   let context = canvas.getContext("2d");
-//   context.beginPath();
-//   context.strokeStyle = "#000";
-//   context.lineWidth = 2;
+  if (currentStep >= 1) {
+    // Draw the head
+    ctx.beginPath();
+    ctx.arc(50, 25, 15, 0, 2 * Math.PI);
+    ctx.stroke();
+  }
 
-//   const drawLine = (fromX, fromY,toX,toY) => {
-//     context.moveTo(fromX,fromY);
-//     context.lineTo(toX, toY);
+  if (currentStep >= 2) {
+    // Draw the body
+    ctx.beginPath();
+    ctx.moveTo(50, 40);
+    ctx.lineTo(50, 90);
+    ctx.stroke();
+  }
 
-//   }
+  if (currentStep >= 3) {
+    // Draw the left arm
+    ctx.beginPath();
+    ctx.moveTo(50, 50);
+    ctx.lineTo(30, 70);
+    ctx.stroke();
+  }
 
-//   const head = () => {
-//     context.beginPath();
-//     context.arc(70,30,10,0,Math.PI * 2, true);
-//     context.stroke();
-//   }
+  if (currentStep >= 4) {
+    // Draw the right arm
+    ctx.beginPath();
+    ctx.moveTo(50, 50);
+    ctx.lineTo(70, 70);
+    ctx.stroke();
+  }
 
-//   const body = () => {
-//     drawLine(70,40, 70, 80);
-//   }
+  if (currentStep >= 5) {
+    // Draw the left leg
+    ctx.beginPath();
+    ctx.moveTo(50, 90);
+    ctx.lineTo(30, 110);
+    ctx.stroke();
+  }
 
-//   const leftArm = () => {
-//     drawLine(70,50,50,70)
-//   }
-
-//   const rightArm = () => {
-//     drawLine(70,50,90,70);
-//   }
-
-//   const leftLeg = () => {
-//     drawLine(70,80,50,110);
-//   }
-
-//   const rightLeg = () => {
-//     drawLine(70,80,90,110);
-//   }
-
-//   const InitialDrawing = () => {
-//     context.clearRect(0,0,context.canvas.width, context.canvas.height);
-//     drawLine(10,130,130,130);
-//     drawLine(10,10,10,131);
-//     drawLine(10,10,70,10);
-//     drawLine(70,10,70,20);
-//   };
-
-//   return {InitialDrawing, head, body, leftArm, rightArm, leftLeg, rightLeg};
-
-// }
-
-// const drawMan = (currentStep ) => {
-//   let { head, body, lefArm, rightArm, leftLeg, rightLeg } = canvasCreator() 
-//   switch(currentStep) {
-//     case 1: 
-//       head();
-//       break;
-//     case 2:
-//       body();
-//       break;
-//     case 3: 
-//       leftArm();
-//       break;
-//     case 4:
-//       rightArm();
-//       break;
-//     case 5: 
-//       rightLeg();
-//       break;
-//     case 6: 
-//       leftLeg();
-//       break;
-//     default:
-//       break;
-//   } 
-// }
+  if (currentStep >= 6) {
+    // Draw the right leg
+    ctx.beginPath();
+    ctx.moveTo(50, 90);
+    ctx.lineTo(70, 110);
+    ctx.stroke();
+  }
+}
