@@ -18,6 +18,16 @@ const hangmanElement = document.getElementById("hangman");
 const clueElement = document.getElementById("clue")
 const canvasElement = document.getElementById("canvas")
 const resultText = document.getElementById("result-text");
+const clueButton = document.createElement("button");
+const hintButton = document.createElement("button");
+
+clueButton.textContent = "Clue";
+clueButton.id = "clueButton";
+hintButton.textContent = "Hint";
+hintButton.id = "hintButton";
+clueElement.appendChild(clueButton);
+clueElement.appendChild(hintButton);
+
 
 
 async function getRandomWord(){
@@ -33,12 +43,18 @@ function addData(object) {
   data.push(object)
 }
 
+
 async function getDefinition() {
-  const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+  const res = await fetch(
+    `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+  );
   const dictionaryPull = await res.json();
-  return dictionaryPull[0].meanings[0].definitions[0].definition && dictionaryPull[0].meanings.partsOfSpeech;
-  
+  return {
+    definition: dictionaryPull[0].meanings[0].definitions[0].definition,
+    partOfSpeech: dictionaryPull[0].meanings[0].partOfSpeech,
+  };
 }
+
 
 async function newGame() {
   guesses = [];
@@ -115,6 +131,15 @@ function endGame() {
   gameFinished = true
 }
 
+clueButton.addEventListener("click", async () => {
+  const wordDefinition = await getDefinition();
+  clueElement.textContent = `Clue: ${wordDefinition.definition} (${wordDefinition.partOfSpeech})`;
+});
+
+hintButton.addEventListener("click", async () => {
+  const wordDefinition = await getDefinition();
+  alert(`Hint: ${wordDefinition.partOfSpeech}`);
+});
 
 // function drawMan(currentStep) {
 //   if (currentStep == 6) {
