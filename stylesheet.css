@@ -16,6 +16,9 @@
 body {
   font-family: SimpleHandMade;
   color: gray;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -69,3 +72,13 @@ h1 {
   text-align: center;
 }
 
+canvas {
+  display:block;
+  margin: auto;
+  border: 10px solid darkgrey;
+  border-radius: 10px;
+}
+
+.hide {
+  display: none;
+}

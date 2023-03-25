@@ -16,6 +16,7 @@ const guessesElement = document.getElementById("guesses");
 const resultElement = document.getElementById("result");
 const hangmanElement = document.getElementById("hangman");
 const clueElement = document.getElementById("clue")
+const canvasElement = document.getElementById("canvas")
 
 async function getRandomWord(){
   console.log("Fetching random word...");
@@ -101,9 +102,34 @@ function endGame() {
 }
 
 function drawMan(count) {
-  //head body, left arm, right arm, left leg, right leg
+  if (currentStep == 6) {
+    resultElement.textContent.innerHTML = `<h2 class='lose-mesg>Game OVer!</h2><p>The word was<span>${word}</span></p>`;
+  }
+}
+
+const canvasCreater = () => {
+  let context = canvas.getContext("2d");
+  context.beginPath();
+  context.strokeStyle = "#000";
+  context.lineWidth = 2;
+
+  const drawLine = (fromX, fromY,toX,toY) => {
+    context.moveTo(fromX,fromY);
+    context.lineTo(toX, toY);
 
   }
+
+  const head = () => {
+    context.beginPath();
+    context.arc(70,30,10,0,Math.PI * 2, true);
+    context.stroke();
+  }
+
+  const body = () => {
+    drawLine(70,40, 70, 80);
+  }
+
+}
 
 
 
