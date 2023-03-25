@@ -19,6 +19,7 @@ const clueElement = document.getElementById("clue")
 const canvasElement = document.getElementById("canvas")
 const resultText = document.getElementById("result-text");
 
+
 async function getRandomWord(){
   console.log("Fetching random word...");
   const response = await fetch(`https://random-word-api.herokuapp.com/word`);
@@ -32,6 +33,13 @@ function addData(object) {
   data.push(object)
 }
 
+async function getDefinition() {
+  const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+  const dictionaryPull = await res.json();
+  return dictionaryPull[0].meanings[0].definitions[0].definition && dictionaryPull[0].meanings.partsOfSpeech;
+  
+}
+
 async function newGame() {
   guesses = [];
   correctGuesses = [];
@@ -40,6 +48,11 @@ async function newGame() {
   gameFinished = false;
   const randomWord = await getRandomWord();
   word = randomWord;
+  console.log(word);
+
+  const wordDefinition = await getDefinition();
+  console.log(wordDefinition)
+
   wordArray = word.split("");
   console.log(word)
 
