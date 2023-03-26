@@ -166,40 +166,45 @@ function showGuesses() {
 guessesElement.innerHTML = "Incorrect guesses: " + wrongGuesses.join(", ");
 }
 
+function resetGame() {
+  // Reset all game variables
+  word = null;
+  guesses = [];
+  correctGuesses = [];
+  wrongGuesses = [];
+  maxWrongGuesses = 6;
+  currentStep = 0;
+  gameFinished = false;
+  wordDefinition = null;
+  
+  // Clear canvas
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Reset HTML elements
+  wordElement.innerHTML = "";
+  guessesElement.innerHTML = "";
+  resultElement.innerHTML = "";
+  lettersElement.innerHTML = "";
+  clueButton.style.display = "none";
+  hintButton.style.display = "none";
+  startButton.style.display = "block";
+}
+
+
 function endGame() {
   gameFinished = true;
   const resultMessage =
     correctGuesses.length === wordArray.length
       ? "You won!"
       : "You lost. The word was " + word + ".";
-  resultElement.innerHTML = resultMessage;
-
-  setTimeout(() => {
-    resetGame();
-    startButton.style.display = "block";
-  }, 5000);
+  
+  alert(resultMessage);
+  resetGame();
+  startButton.style.display = "block";
 }
 
-
-
-function resetGame() {
-guesses = [];
-correctGuesses = [];
-wrongGuesses = [];
-currentStep = 0;
-gameFinished = false;
-word = null;
-wordArray = null;
-wordDefinition = null;
-resultElement.innerHTML = "";
-canvasElement.getContext("2d").clearRect(0, 0, canvasElement.width, canvasElement.height);
-lettersElement.innerHTML = "";
-clueButton.style.display = "none";
-hintButton.style.display = "none";
-startButton.style.display = "block";
-wordElement.innerHTML = "";
-guessesElement.innerHTML = "";
-}
 
 
 function drawMan(currentStep) {
