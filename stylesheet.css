@@ -113,17 +113,6 @@ h2 {
 
 /* Set a max-width for the word container and use a responsive font size */
 
-canvas {
-  /* border: solid darkgrey 10px; */
-  padding-bottom: 20px;
-  /* margin-bottom: 20px; */
-  max-width: 100%;
-  max-height: 100%;
-  background-color: lightpink;
-  margin: 30px;
-  border-radius: 10% / 50% ;
-}
-
 #result {
   font-size: 24px;
   font-weight: bold;
@@ -200,4 +189,16 @@ canvas {
 #hintButton:hover,
 #startButton:hover {
   background-color: lightgrey;
+}
+
+#hangman-container {
+  display: flex;
+  height: 200px;
+  width: 50%;
+  align-items: center;
+}
+
+img {
+  height: 100px;
+  width: 50%
 }

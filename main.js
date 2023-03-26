@@ -10,9 +10,8 @@ const wordElement = document.getElementById("word");
 const lettersElement = document.getElementById("letters");
 const guessesElement = document.getElementById("guesses");
 const resultElement = document.getElementById("result");
-const hangmanElement = document.getElementById("hangman");
+const hangmanContainer = document.getElementById("hangman-container");
 const clueElement = document.getElementById("clue");
-const canvasElement = document.getElementById("canvas");
 const clueButton = document.createElement("button");
 const hintButton = document.createElement("button");
 const startButton = document.createElement("button");
@@ -137,18 +136,21 @@ async function newGame() {
       }
     });
   }
-} 
+  // Show the clue and hint buttons
+  clueButton.style.display = "block";
+  hintButton.style.display = "block";
+}
 
-clueButton.addEventListener("click", async () => {
-  const wordDefinition = await getDefinition(word);
-  alert(`Clue: ${wordDefinition.definition}`);
-  clueButton.style.display = "none";
+  clueButton.addEventListener("click", async () => {
+    const wordDefinition = await getDefinition(word);
+    alert(`Clue: ${wordDefinition.definition}`);
+    clueButton.style.display = "none";
   });
   
   hintButton.addEventListener("click", async () => {
-  const wordDefinition = await getDefinition(word);
-  alert(`Hint: ${wordDefinition.partOfSpeech}`);
-  hintButton.style.display = "none";
+    const wordDefinition = await getDefinition(word);
+    alert(`Hint: ${wordDefinition.partOfSpeech}`);
+    hintButton.style.display = "none";
   });
 
   directionButton.addEventListener("click", async () => {
@@ -187,9 +189,8 @@ function resetGame() {
   wordDefinition = null;
   
   // Clear canvas
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hangmanContainer.innerHTML = "";
+
   
   // Reset HTML elements
   wordElement.innerHTML = "";
@@ -217,64 +218,18 @@ function endGame() {
   startButton.style.display = "block";
 }
 
+const imagePaths = [
+"https://imgur.com/M4yEtI4"
+  // Add more image paths as needed
+];
+
+function displayImage(currentStep) {
+  const image = document.createElement('img');
+  image.src = imagePaths[currentStep];
+  hangmanContainer.appendChild(image);
+}
 
 
 function drawMan(currentStep) {
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-  
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = 'black';
-  
-  if (currentStep >= 1) {
-  // Draw the head
-  ctx.beginPath();
-  ctx.arc(50, 25, 15, 0, 2 * Math.PI);
-  ctx.stroke();
-  }
-  
-  if (currentStep >= 2) {
-  // Draw the body
-  ctx.beginPath();
-  ctx.moveTo(50, 40);
-  ctx.lineTo(50, 90);
-  ctx.stroke();
-  }
-  
-  if (currentStep >= 3) {
-  // Draw the left arm
-  ctx.beginPath();
-  ctx.moveTo(50, 50);
-  ctx.lineTo(30, 70);
-  ctx.stroke();
-  }
-  
-  if (currentStep >= 4) {
-  // Draw the right arm
-  ctx.beginPath();
-  ctx.moveTo(50, 50);
-  ctx.lineTo(70, 70);
-  ctx.stroke();
-  }
-  
-  if (currentStep >= 5) {
-  // Draw the left leg
-  ctx.beginPath();
-  ctx.moveTo(50, 90);
-  ctx.lineTo(30, 110);
-  ctx.stroke();
-  }
-  
-  if (currentStep >= 6) {
-    // Draw the right leg
-    ctx.beginPath();
-    ctx.moveTo(50, 90);
-    ctx.lineTo(70, 110);
-    ctx.stroke();
-  
-    // // Draw the right foot
-    // ctx.beginPath();
-    // ctx.arc(70, 110, 5, 0, 2 * Math.PI);
-    // ctx.stroke();
-  }
-}  
+  displayImage(currentStep);
+}
