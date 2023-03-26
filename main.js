@@ -42,6 +42,7 @@ startButton.addEventListener("click", () => {
   clueButton.style.display = "block";
   hintButton.style.display = "block";
   startButton.style.display = "none";
+  h1Element.style.display = "none"
 });
 
 async function getRandomWord(){
@@ -203,6 +204,7 @@ function endGame() {
   alert(resultMessage);
   resetGame();
   startButton.style.display = "block";
+  h1Element.style.display = "inherit"
 }
 
 
