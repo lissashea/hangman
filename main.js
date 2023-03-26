@@ -21,9 +21,35 @@ const resultText = document.getElementById("result-text");
 const clueButton = document.createElement("button");
 const hintButton = document.createElement("button");
 const startButton = document.createElement("button");
+const directionButton = document.createElement("button")
 const gameContainer = document.getElementsByClassName("game-container")
 h1Element = document.querySelector("h1")
+const container = document.querySelector(".game-section");
+container.appendChild(directionButton);
+const directionElement = document.querySelector(".directions");
 
+function startCountdown(seconds, callback) {
+  const countdownElement = document.createElement('div');
+  countdownElement.classList.add('countdown');
+  countdownElement.innerText = seconds;
+
+  document.body.appendChild(countdownElement);
+
+  const interval = setInterval(() => {
+    seconds--;
+    countdownElement.innerText = seconds;
+
+    if (seconds <= 0) {
+      clearInterval(interval);
+      document.body.removeChild(countdownElement);
+      callback();
+    }
+  }, 1000);
+}
+
+
+directionButton.textContent = "Directions"
+directionButton.id = "directionButton"
 clueButton.textContent = "Clue";
 clueButton.id = "clueButton";
 hintButton.textContent = "Hint";
@@ -39,10 +65,12 @@ hintButton.style.display = "none";
 
 startButton.addEventListener("click", () => {
   newGame();
+  // startButton.style.display = "none";
+  h1Element.style.display = "none"
+  directionElement.style.display = "none"
   clueButton.style.display = "block";
   hintButton.style.display = "block";
-  startButton.style.display = "none";
-  h1Element.style.display = "none"
+  directionButton.style.display = "block"
 });
 
 async function getRandomWord(){
@@ -87,55 +115,59 @@ async function newGame() {
   currentStep = 0;
   gameFinished = false;
   let randomWord = "";
-  while (true) {
-    randomWord = await getRandomWord();
-    console.log(randomWord);
-    const definition = await getDefinition(randomWord);
-    if (definition) {
-      word = randomWord;
-      wordDefinition = definition;
-      break;
+
+  startCountdown(5, async () => {
+    while (true) {
+      randomWord = await getRandomWord();
+      console.log(randomWord);
+      const definition = await getDefinition(randomWord);
+      if (definition) {
+        word = randomWord;
+        wordDefinition = definition;
+        break;
+      }
     }
-  }
-  console.log(word, wordDefinition);
 
-  wordArray = word.split("");
-  console.log(word)
+    console.log(word, wordDefinition);
 
-  lettersElement.innerHTML = "";
-  for (let i = 65; i <= 90; i++) {
-    const letter = String.fromCharCode(i);
-    const button = document.createElement("button");
-    button.textContent = letter;
-    lettersElement.appendChild(button);
+    wordArray = word.split("");
+    console.log(word)
 
-    button.addEventListener('click', () => {
-      if (gameFinished) {
-        return;
-      }
-      guesses.push(button.innerHTML)
-      button.classList.add('active');
-      button.setAttribute('style', 'background-color: grey');
-      const selectedLetter = button.innerHTML.toLowerCase();
-      if (wordArray.includes(selectedLetter)) {
-        for (let i = 0; i < wordArray.length; i++) {
-          if (wordArray[i] === selectedLetter) {
-            correctGuesses.push(selectedLetter);
-          }
+    lettersElement.innerHTML = "";
+    for (let i = 65; i <= 90; i++) {
+      const letter = String.fromCharCode(i);
+      const button = document.createElement("button");
+      button.textContent = letter;
+      lettersElement.appendChild(button);
+
+      button.addEventListener('click', () => {
+        if (gameFinished) {
+          return;
         }
-      } else {
-        wrongGuesses.push(selectedLetter);
-        currentStep++;
-        drawMan(currentStep);
-      }
-    
-      showWord();
-      showGuesses();
-      if (currentStep === 6) {
-        endGame();
-      }
-    });
-  }
+        guesses.push(button.innerHTML)
+        button.classList.add('active');
+        button.setAttribute('style', 'background-color: grey');
+        const selectedLetter = button.innerHTML.toLowerCase();
+        if (wordArray.includes(selectedLetter)) {
+          for (let i = 0; i < wordArray.length; i++) {
+            if (wordArray[i] === selectedLetter) {
+              correctGuesses.push(selectedLetter);
+            }
+          }
+        } else {
+          wrongGuesses.push(selectedLetter);
+          currentStep++;
+          drawMan(currentStep);
+        }
+
+        showWord();
+        showGuesses();
+        if (currentStep === 6) {
+          endGame();
+        }
+      });
+    }
+  });
 }
 
 
@@ -150,6 +182,14 @@ clueButton.addEventListener("click", async () => {
   alert(`Hint: ${wordDefinition.partOfSpeech}`);
   hintButton.style.display = "none";
   });
+
+  directionButton.addEventListener("click", async () => {
+    alert(`Guess the letters to uncover the word. You have 6 attempts to guess the word before the man is hanged.
+    Click the "Clue" button for a hint about the word. Click the "Hint" button to see the part of speech of the word.`);
+    hintButton.style.display = "none";
+    });
+  
+    
 
 function showWord() {
 let displayedWord = "";
@@ -191,6 +231,8 @@ function resetGame() {
   clueButton.style.display = "none";
   hintButton.style.display = "none";
   startButton.style.display = "block";
+  directionButton.style.display = "none"
+  directionElement.style.display = "flex"
 }
 
 
@@ -203,8 +245,8 @@ function endGame() {
   
   alert(resultMessage);
   resetGame();
-  startButton.style.display = "block";
   h1Element.style.display = "inherit"
+  startButton.style.display = "block";
 }
 
 

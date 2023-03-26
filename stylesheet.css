@@ -7,6 +7,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: SimpleHandMade;
 }
 
 body {
@@ -16,39 +17,47 @@ body {
     overflow: hidden;
     background-color:lightpink;
     min-height: 100vh; 
+    margin: 1px;
+    padding: 10px;
     
 }
 
 section {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .directions {
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: solid black 2px;
+  background-color: rgb(179, 219, 179);
+  font-weight: bold;
+  font-size: 28px;
 }
 
 .game-container{
   padding: 20px 30px;
-  position: relative;
+  /* position: relative; */
   margin: auto;
   height: 350px;
   width: 450px;
-  display: flex;
-  justify-content: center;
+  display: contents;
+  /* justify-content: center;
   flex-direction: row;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
 }
 
 h1{
-  margin: 60px 0 0;
+  margin: 75px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 75px;
 }
 
 h2 {
@@ -158,10 +167,12 @@ canvas {
   width: 50%;
   align-items: baseline;
   justify-content: center;
+  padding-top: 20px;
 }
 
 #clueButton,
-#hintButton {
+#hintButton,
+#directionButton {
   font-family: SimpleHandMade;
   font-size: 18px;
   background-color: white;
@@ -174,6 +185,7 @@ canvas {
 }
 
 #clueButton:hover,
+#directionButton:hover,
 #hintButton:hover,
 #startButton:hover {
   background-color: lightgrey;
