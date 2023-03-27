@@ -11,14 +11,27 @@ const lettersElement = document.getElementById("letters");
 const guessesElement = document.getElementById("guesses");
 const resultElement = document.getElementById("result");
 const hangmanContainer = document.getElementById("hangman-container");
+
 const clueElement = document.getElementById("clue");
 const clueButton = document.createElement("button");
 const hintButton = document.createElement("button");
 const startButton = document.createElement("button");
 const directionButton = document.createElement("button")
-const h1Element = document.querySelector("h1")
 const directionElement = document.querySelector(".directions")
+
+const h1Element = document.querySelector("h1")
 const h2Element = document.querySelector("h2")
+
+const gameContainer = document.createElement('div')
+const buttonContainer = document.getElementById("button-container") || document.createElement("div");
+buttonContainer.id = "button-container";
+buttonContainer.appendChild(clueButton);
+buttonContainer.appendChild(hintButton);
+
+//variables
+//new elements
+//assigning elements ids & text
+//style components
 
 clueButton.textContent = "Clue";
 clueButton.id = "clueButton";
@@ -31,7 +44,10 @@ startButton.id = "startButton";
 directionButton.id = "directionButton"
 directionButton.textContent = "Directions"
 h1Element.append(startButton);
-h1Element.append(directionButton)
+
+gameContainer.appendChild(button)
+document.querySelector(".game-container").appendChild(gameContainer);
+
 
 clueButton.style.display = "none";
 hintButton.style.display = "none";
