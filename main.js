@@ -1,12 +1,3 @@
-// Variables
-let word;
-let guesses = [];
-let correctGuesses = [];
-let wrongGuesses = [];
-let maxWrongGuesses = 6;
-let gameFinished = false;
-let currentStep = 0;
-
 // HTML elements
 const wordElement = document.getElementById("word");
 const lettersElement = document.getElementById("letters");
@@ -14,9 +5,9 @@ const guessesElement = document.getElementById("guesses");
 const resultElement = document.getElementById("result");
 const hangmanContainer = document.getElementById("hangman-container");
 const clueElement = document.getElementById("clue");
+const startButton = document.createElement("button");
 const clueButton = document.createElement("button");
 const hintButton = document.createElement("button");
-const startButton = document.createElement("button");
 const directionButton = document.createElement("button");
 const directionElement = document.querySelector(".directions");
 const h1Element = document.querySelector("h1");
@@ -36,16 +27,37 @@ startButton.id = "startButton";
 directionButton.id = "directionButton";
 directionButton.textContent = "Directions";
 directionButton.style.display = "none";
-gameContainer.appendChild(directionButton);
-document.querySelector(".game-container").appendChild(gameContainer);
-buttonContainer.id = "button-container";
-buttonContainer.appendChild(clueButton);
-buttonContainer.appendChild(hintButton);
 
 // Assigning elements IDs & text
 clueElement.appendChild(clueButton);
 clueElement.appendChild(hintButton);
 h1Element.append(startButton);
+
+// Wrap the buttons in a <div> container
+const buttonsWrapper = document.createElement("div");
+buttonsWrapper.className = "buttons-wrapper";
+buttonsWrapper.appendChild(clueButton);
+buttonsWrapper.appendChild(hintButton);
+buttonsWrapper.appendChild(directionButton);
+
+// Append the buttons container to the button container element
+buttonContainer.id = "button-container";
+buttonContainer.appendChild(buttonsWrapper);
+
+// Append the button container element to the directions container element
+document.querySelector(".directions-container").appendChild(buttonContainer);
+
+gameContainer.appendChild(directionButton);
+document.querySelector(".game-container").appendChild(gameContainer);
+
+// Variables
+let word;
+let guesses = [];
+let correctGuesses = [];
+let wrongGuesses = [];
+let maxWrongGuesses = 6;
+let gameFinished = false;
+let currentStep = 0;
 
 // Event listeners
 startButton.addEventListener("click", () => {
@@ -76,16 +88,6 @@ directionButton.addEventListener("click", async () => {
   directionButton.style.display = "block";
 });
 
-
-startButton.addEventListener("click", () => {
-  newGame();
-  startButton.style.display = "none";
-  directionButton.style.display = "block"
-  clueButton.style.display = "block";
-  hintButton.style.display = "block";
-  directionElement.style.display = "none"
-  h1Element.style.display = "none"
-});
 
 async function getRandomWord(){
   console.log("Fetching random word...");
