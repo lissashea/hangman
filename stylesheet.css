@@ -24,7 +24,7 @@ body {
     color: hotpink;
 }
 
-p span {
+span {
   color: darkblue;
 }
 
@@ -55,6 +55,7 @@ section {
   font-size: 25px;
   text-align: center;
   font-weight: bold;
+  line-height: 1.4;
 }
 
 .game-container {
@@ -64,36 +65,39 @@ section {
   text-align: center;
 }
 
-h1 {
+h1 span {
   margin: 0 0 50px 0;
   font-size: 50px;
   color: hotpink;
   display: flex;
   align-items: center;
   flex-direction: column;
-}
-
-h1 span {
   text-decoration-line: underline;
   text-decoration-style: solid;
 }
 
+h1 {
+  flex-direction: column;
+  display: flex;
+}
+
 h2 {
   display: flex;
-  font-size: 40px;
+  font-size: 25px;
+  color: darkblue;
 }
 
 #word {
-  font-size: 6vw;
+  font-size: 57px;
+  color: darkblue;
   margin: auto;
   display: flex;
   justify-content: center;
-  padding-bottom: 20px;
 }
 
 #letters {
   display: flex;
-  color: hotpink;
+  color: darkblue;
   flex-wrap: wrap;
   justify-content: center;
   flex-direction: row;
@@ -140,8 +144,9 @@ h2 {
 }
 
 #startButton {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: auto;
+  margin-top: -15px;
+  margin-bottom: 150px;
 }
 
 #clue {
@@ -153,14 +158,11 @@ h2 {
 }
 
 #buttons {
-  bottom: 0.5in;
+  position: absolute;
+  bottom: 0;
   left: 50%;
-  /* transform: translateX(-50%); */
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
+  transform: translateX(-50%);
 }
-
 
 #clueButton,
 #hintButton,
@@ -172,7 +174,7 @@ h2 {
   border: 1px solid black;
   border-radius: 5px;
   cursor: pointer;
-  padding: 10px;
+  padding: 8px;
   color: grey;
 }
 
