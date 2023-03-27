@@ -223,7 +223,6 @@ function resetGame() {
   h1Element.style.display = "flex"
 }
 
-
 function endGame() {
   gameFinished = true;
   const resultMessage =
@@ -231,10 +230,17 @@ function endGame() {
       ? "You won!"
       : "You lost. The word was " + word + ".";
   
-  alert(resultMessage);
-  resetGame();
-  h1Element.style.display = "inherit"
-  startButton.style.display = "block";
+  drawMan(currentStep);
+  
+  if (currentStep === 6) {
+    setTimeout(() => {
+      alert(resultMessage);
+      resetGame();
+    }, 1000); 
+  } else {
+    alert(resultMessage);
+    resetGame();
+  }
 }
 
 const imagePaths = [  "hangman1.png",  "hangman2.png",  "hangman3.png",  "hangman4.png",  "hangman5.png",  "hangman6.png"];
@@ -254,8 +260,19 @@ function displayImage(currentStep) {
 
 
 function drawMan(currentStep) {
-  if (currentStep <= imagePaths.length) {
-    displayImage(currentStep);
+  if (currentStep <= 6) {
+    const imagePath = imagePaths[currentStep - 1];
+    const image = document.createElement('img');
+    image.src = imagePath;
+
+    // Remove the current image, if any
+    const currentImage = hangmanContainer.querySelector('img');
+    if (currentImage) {
+      hangmanContainer.removeChild(currentImage);
+    }
+
+    hangmanContainer.appendChild(image);
   }
 }
+
 
