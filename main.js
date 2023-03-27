@@ -1,3 +1,4 @@
+// Variables
 let word;
 let guesses = [];
 let correctGuesses = [];
@@ -6,52 +7,74 @@ let maxWrongGuesses = 6;
 let gameFinished = false;
 let currentStep = 0;
 
+// HTML elements
 const wordElement = document.getElementById("word");
 const lettersElement = document.getElementById("letters");
 const guessesElement = document.getElementById("guesses");
 const resultElement = document.getElementById("result");
 const hangmanContainer = document.getElementById("hangman-container");
-
 const clueElement = document.getElementById("clue");
 const clueButton = document.createElement("button");
 const hintButton = document.createElement("button");
 const startButton = document.createElement("button");
-const directionButton = document.createElement("button")
-const directionElement = document.querySelector(".directions")
-
-const h1Element = document.querySelector("h1")
-const h2Element = document.querySelector("h2")
-
-const gameContainer = document.createElement('div')
+const directionButton = document.createElement("button");
+const directionElement = document.querySelector(".directions");
+const h1Element = document.querySelector("h1");
+const h2Element = document.querySelector("h2");
+const gameContainer = document.createElement("div");
 const buttonContainer = document.getElementById("button-container") || document.createElement("div");
+
+// Style components
+clueButton.textContent = "Clue";
+clueButton.id = "clueButton";
+clueButton.style.display = "none";
+hintButton.textContent = "Hint";
+hintButton.id = "hintButton";
+hintButton.style.display = "none";
+startButton.textContent = "Start Game";
+startButton.id = "startButton";
+directionButton.id = "directionButton";
+directionButton.textContent = "Directions";
+directionButton.style.display = "none";
+gameContainer.appendChild(directionButton);
+document.querySelector(".game-container").appendChild(gameContainer);
 buttonContainer.id = "button-container";
 buttonContainer.appendChild(clueButton);
 buttonContainer.appendChild(hintButton);
 
-//variables
-//new elements
-//assigning elements ids & text
-//style components
-
-clueButton.textContent = "Clue";
-clueButton.id = "clueButton";
-hintButton.textContent = "Hint";
-hintButton.id = "hintButton";
+// Assigning elements IDs & text
 clueElement.appendChild(clueButton);
 clueElement.appendChild(hintButton);
-startButton.textContent = "Start Game";
-startButton.id = "startButton";
-directionButton.id = "directionButton"
-directionButton.textContent = "Directions"
 h1Element.append(startButton);
 
-gameContainer.appendChild(button)
-document.querySelector(".game-container").appendChild(gameContainer);
+// Event listeners
+startButton.addEventListener("click", () => {
+  newGame();
+  startButton.style.display = "none";
+  directionButton.style.display = "block";
+  clueButton.style.display = "block";
+  hintButton.style.display = "block";
+  directionElement.style.display = "none";
+  h1Element.style.display = "none";
+});
 
+clueButton.addEventListener("click", async () => {
+  const wordDefinition = await getDefinition(word);
+  alert(`Clue: ${wordDefinition.definition}`);
+  clueButton.style.display = "none";
+});
 
-clueButton.style.display = "none";
-hintButton.style.display = "none";
-directionButton.style.display = "none";
+hintButton.addEventListener("click", async () => {
+  const wordDefinition = await getDefinition(word);
+  alert(`Hint: ${wordDefinition.partOfSpeech}`);
+  hintButton.style.display = "none";
+});
+
+directionButton.addEventListener("click", async () => {
+  alert(`Guess the letters to uncover the word. You have 6 attempts to guess the word before the man is hanged.
+  Click the "Clue" button for a hint about the word. Click the "Hint" button to see the part of speech of the word.`);
+  directionButton.style.display = "block";
+});
 
 
 startButton.addEventListener("click", () => {
@@ -158,25 +181,6 @@ async function newGame() {
   hintButton.style.display = "block";
 }
 
-  clueButton.addEventListener("click", async () => {
-    const wordDefinition = await getDefinition(word);
-    alert(`Clue: ${wordDefinition.definition}`);
-    clueButton.style.display = "none";
-  });
-  
-  hintButton.addEventListener("click", async () => {
-    const wordDefinition = await getDefinition(word);
-    alert(`Hint: ${wordDefinition.partOfSpeech}`);
-    hintButton.style.display = "none";
-  });
-
-  directionButton.addEventListener("click", async () => {
-    alert(`Guess the letters to uncover the word. You have 6 attempts to guess the word before the man is hanged.
-    Click the "Clue" button for a hint about the word. Click the "Hint" button to see the part of speech of the word.`);
-    directionButton.style.display = "block";
-    });
-  
-    
 
 function showWord() {
 let displayedWord = "";
