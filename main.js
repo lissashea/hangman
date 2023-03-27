@@ -45,6 +45,7 @@ startButton.addEventListener("click", () => {
   clueButton.style.display = "block";
   hintButton.style.display = "block";
   directionElement.style.display = "none"
+  h1Element.style.display = "none"
 });
 
 async function getRandomWord(){
@@ -202,6 +203,7 @@ function resetGame() {
   startButton.style.display = "block";
   directionButton.style.display = "none"
   directionElement.style.display = "flex"
+  h1Element.style.display = "flex"
 }
 
 
