@@ -19,6 +19,7 @@ body {
     min-height: 100vh; 
     margin: 1px;
     padding: 10px;
+    border: lightgreen solid 2px;
     
 }
 
@@ -29,6 +30,7 @@ section {
 }
 
  .directions {
+  margin: 30px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -193,14 +195,15 @@ h2 {
 
 #hangman-container {
   display: flex;
-  height: 200px;
-  width: 50%;
+  height: 100px;
+  width: 100px;
   align-items: center;
   flex-direction: column;
   justify-content: center;
 }
 
 img {
-  height: 30px;
-  width: 25%
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
 }

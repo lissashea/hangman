@@ -218,21 +218,25 @@ function endGame() {
   startButton.style.display = "block";
 }
 
-const imagePaths = [  "waves.png",  "surfboard1.png",  "image1.png",  "image2.png",  "image3.png",  "image4.png",  "image5.png",  "image6.png"];
+const imagePaths = [  "1.png",  "2.png",  "3.png",  "4.png",  "5.png",  "6.png"];
 
 function displayImage(currentStep) {
   const image = document.createElement('img');
-  if (currentStep === 1) {
-    image.src = imagePaths[0];
-  } else if (currentStep === 2) {
-    image.src = imagePaths[1];
-  } else {
-    image.src = imagePaths[currentStep];
+  image.src = imagePaths[currentStep - 1];
+
+  // Remove the current image, if any
+  const currentImage = hangmanContainer.querySelector('img');
+  if (currentImage) {
+    hangmanContainer.removeChild(currentImage);
   }
+
   hangmanContainer.appendChild(image);
 }
 
+
 function drawMan(currentStep) {
-  displayImage(currentStep);
+  if (currentStep <= imagePaths.length) {
+    displayImage(currentStep);
+  }
 }
 
