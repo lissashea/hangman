@@ -96,7 +96,6 @@ h2 {
   color: hotpink;
   flex-wrap: wrap;
   justify-content: center;
-  /* padding-bottom: 20px; */
   flex-direction: row;
 }
 
@@ -122,17 +121,13 @@ h2 {
   color: darkblue;
 }
 
-@media only screen and (max-width: 600px) {
-  #letters {
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: center;
+@media only screen and (max-width: 768px) {
+  .directions {
+    display: none;
   }
 }
 
-/* Set a max-width for the word container and use a responsive font size */
-
-#result {
+/* #result {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
@@ -154,20 +149,9 @@ h2 {
 
 #result-text span {
   font-weight: 600;
-}
-
-/* #startButton {
-  background-color: lightgrey;
-  font-family: SimpleHandMade;
-  font-size: 18px;
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 30px;
-  padding: 10px;
-  color: hotpink;
 } */
+
+
 
 #directionButton {
   padding: 10px;
@@ -186,9 +170,18 @@ h2 {
   gap: 20px;
   align-items: baseline;
   justify-content: center;
-  /* margin-top: 20px; */
   flex-direction: row;
 }
+
+#buttons {
+  bottom: 0.5in;
+  left: 50%;
+  /* transform: translateX(-50%); */
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 
 #clueButton,
 #hintButton,
@@ -203,6 +196,7 @@ h2 {
   padding: 10px;
   color: grey;
 }
+
 
 #clueButton:hover,
 #startButton:hover,
