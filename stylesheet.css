@@ -22,7 +22,6 @@ body {
     margin: 1px;
     padding: 10px;
     color: hotpink;
-    
 }
 
 p span {
@@ -84,24 +83,6 @@ h2 {
   font-size: 40px;
 }
 
-#button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-#button-container button {
-  margin: 0 5px;
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-
 #word {
   font-size: 6vw;
   margin: auto;
@@ -125,7 +106,7 @@ h2 {
   height: 40px;
   font-size: 17px;
   margin: 3px;
-  background-color: white;
+  /* background-color: white; */
   border: 1px solid darkblue;
   border-radius: 5px;
   cursor: pointer;
@@ -176,7 +157,7 @@ h2 {
   font-weight: 600;
 }
 
-#startButton {
+/* #startButton {
   background-color: lightgrey;
   font-family: SimpleHandMade;
   font-size: 18px;
@@ -187,8 +168,7 @@ h2 {
   margin-top: 30px;
   padding: 10px;
   color: hotpink;
-  
-}
+} */
 
 #directionButton {
   padding: 10px;
@@ -211,10 +191,9 @@ h2 {
   flex-direction: row;
 }
 
-
-
 #clueButton,
 #hintButton,
+#startButton,
 #directionButton {
   font-family: SimpleHandMade;
   font-size: 18px;
@@ -227,6 +206,7 @@ h2 {
 }
 
 #clueButton:hover,
+#startButton:hover,
 #directionButton:hover,
 #hintButton:hover {
   background-color: lightgrey;

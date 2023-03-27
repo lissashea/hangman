@@ -13,7 +13,6 @@ const hintButton = document.getElementById("hintButton");
 const h1Element = document.querySelector("h1");
 const h2Element = document.querySelector("h2");
 const gameContainer = document.createElement("div");
-const buttonContainer = document.getElementById("button-container") || document.createElement("div");
 
 const directionElement = document.querySelector(".directions");
 const directionButton = document.getElementById("directionButton");
@@ -27,17 +26,6 @@ h1Element.appendChild(startButton);
 clueElement.appendChild(clueButton);
 clueElement.appendChild(hintButton);
 
-
-// // Wrap the buttons in a <div> container
-// const buttonsWrapper = document.createElement("div");
-// buttonsWrapper.className = "buttons-wrapper";
-// buttonsWrapper.appendChild(clueButton);
-// buttonsWrapper.appendChild(hintButton);
-// buttonsWrapper.appendChild(directionButton);
-
-// // Append the buttons container to the button container element
-// buttonContainer.id = "button-container";
-// buttonContainer.appendChild(buttonsWrapper);
 
 // Variables
 let word;
@@ -180,6 +168,18 @@ async function newGame() {
 }
 
 
+// function showWord() {
+//   let displayedWord = "";
+//   for (let i = 0; i < wordArray.length; i++) {
+//     if (correctGuesses.includes(wordArray[i])) {
+//       displayedWord += wordArray[i] + "";
+//     } else {
+//       displayedWord += " _ ";
+//     }
+//   }
+//   wordElement.innerHTML = displayedWord.trim();
+// }
+
 function showWord() {
   let displayedWord = "";
   for (let i = 0; i < wordArray.length; i++) {
@@ -190,6 +190,11 @@ function showWord() {
     }
   }
   wordElement.innerHTML = displayedWord.trim();
+  
+  if (correctGuesses.length > 0) {
+    guessesElement.style.backgroundColor = "rgb(255 255 255 / 45%)";
+    wordElement.style.backgroundColor = "rgb(255 255 255 / 45%)";
+  }
 }
 
 
@@ -197,6 +202,9 @@ function showGuesses() {
   guessesElement.innerHTML = "Incorrect guesses: " + wrongGuesses.join(", ");
   if (wrongGuesses.length === 5) {
     alert("You have one more attempt. Guess carefully!");
+  }
+  if (wrongGuesses.length > 0) {
+    guessesElement.style.backgroundColor = "rgb(255 255 255 / 45%)"; 
   }
 }
 
@@ -222,10 +230,10 @@ function resetGame() {
   lettersElement.innerHTML = "";
   clueButton.style.display = "none";
   hintButton.style.display = "none";
+  h1Element.style.display = "flex"
   startButton.style.display = "flex";
   directionButton.style.display = "none"
   directionElement.style.display = "flex"
-  h1Element.style.display = "flex"
 }
 
 function endGame() {
@@ -248,36 +256,37 @@ function endGame() {
   }
 }
 
-const imagePaths = [  "hangman1.png",  "hangman2.png",  "hangman3.png",  "hangman4.png",  "hangman5.png",  "hangman6.png"];
+// function displayImage(currentStep) {
+//   const image = document.createElement('img');
+//   image.src = imagePaths[currentStep - 1];
 
-function displayImage(currentStep) {
-  const image = document.createElement('img');
-  image.src = imagePaths[currentStep - 1];
+//   // Remove the current image, if any
+//   const currentImage = hangmanContainer.querySelector('img');
+//   if (currentImage) {
+//     hangmanContainer.removeChild(currentImage);
+//   }
 
-  // Remove the current image, if any
-  const currentImage = hangmanContainer.querySelector('img');
-  if (currentImage) {
-    hangmanContainer.removeChild(currentImage);
-  }
+//   hangmanContainer.appendChild(image);
+// }
+const imagePaths = [ "hangman1.png", "hangman2.png", "hangman3.png", "hangman4.png", "hangman5.png", "hangman6.png" ];
 
-  hangmanContainer.appendChild(image);
-}
-
+const images = imagePaths.map((path) => {
+  const img = new Image();
+  img.src = path;
+  return img;
+});
 
 function drawMan(currentStep) {
   if (currentStep <= 6) {
-    const imagePath = imagePaths[currentStep - 1];
-    const image = document.createElement('img');
-    image.src = imagePath;
-
+    const image = images[currentStep - 1];
     // Remove the current image, if any
     const currentImage = hangmanContainer.querySelector('img');
     if (currentImage) {
       hangmanContainer.removeChild(currentImage);
     }
-
     hangmanContainer.appendChild(image);
   }
 }
+
 
 
