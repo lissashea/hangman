@@ -9,13 +9,14 @@ const hangmanContainer = document.getElementById("hangman-container");
 const clueElement = document.getElementById("clue");
 const clueButton = document.getElementById("clueButton");
 const hintButton = document.getElementById("hintButton");
-const directionButton = document.getElementById("directionButton");
+
 const h1Element = document.querySelector("h1");
 const h2Element = document.querySelector("h2");
 const gameContainer = document.createElement("div");
 const buttonContainer = document.getElementById("button-container") || document.createElement("div");
 
 const directionElement = document.querySelector(".directions");
+const directionButton = document.getElementById("directionButton");
 
 const startButton = document.createElement("button")
 startButton.textContent = "Start Game";
@@ -53,6 +54,7 @@ startButton.addEventListener("click", () => {
   startButton.style.display = "none";
   h1Element.style.display = "none"
   directionElement.style.display = "none";
+  directionButton.style.display = "block"
   clueButton.style.display = "block";
   hintButton.style.display = "block";
 });
@@ -112,8 +114,8 @@ async function getDefinition(randomWord) {
 
 async function newGame() {
   resetGame();
-  clueButton.style.display = "block";
-  hintButton.style.display = "block";
+  // clueButton.style.display = "block";
+  // hintButton.style.display = "block";
   guesses = [];
   correctGuesses = [];
   wrongGuesses = [];
@@ -192,7 +194,10 @@ function showWord() {
 
 
 function showGuesses() {
-guessesElement.innerHTML = "Incorrect guesses: " + wrongGuesses.join(", ");
+  guessesElement.innerHTML = "Incorrect guesses: " + wrongGuesses.join(", ");
+  if (wrongGuesses.length === 5) {
+    alert("You have one more attempt. Guess carefully!");
+  }
 }
 
 function resetGame() {
@@ -227,8 +232,8 @@ function endGame() {
   gameFinished = true;
   const resultMessage =
     correctGuesses.length === wordArray.length
-      ? "You won!"
-      : "You lost. The word was " + word + ".";
+      ? "You won! Great Job"
+      : "You lost. Sadly our surfer stick will now be drunk surfing and thats extremely dangerous! The word was " + word + ".";
   
   drawMan(currentStep);
   
@@ -236,7 +241,7 @@ function endGame() {
     setTimeout(() => {
       alert(resultMessage);
       resetGame();
-    }, 1000); 
+    }, 500); 
   } else {
     alert(resultMessage);
     resetGame();
