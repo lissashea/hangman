@@ -168,6 +168,10 @@ async function newGame() {
       }
     });
   }
+
+  // Display the underline letter placeholders
+  showWord();
+  
   // Show the clue and hint buttons
   // clueButton.style.display = "block";
   // hintButton.style.display = "block";
@@ -175,16 +179,17 @@ async function newGame() {
 
 
 function showWord() {
-let displayedWord = "";
-for (let i = 0; i < wordArray.length; i++) {
-if (correctGuesses.includes(wordArray[i])) {
-displayedWord += wordArray[i] + "";
-} else {
-displayedWord += " _ ";
+  let displayedWord = "";
+  for (let i = 0; i < wordArray.length; i++) {
+    if (correctGuesses.includes(wordArray[i])) {
+      displayedWord += wordArray[i] + "";
+    } else {
+      displayedWord += " _ ";
+    }
+  }
+  wordElement.innerHTML = displayedWord.trim();
 }
-}
-wordElement.innerHTML = displayedWord.trim();
-}
+
 
 function showGuesses() {
 guessesElement.innerHTML = "Incorrect guesses: " + wrongGuesses.join(", ");
@@ -232,7 +237,7 @@ function endGame() {
   startButton.style.display = "block";
 }
 
-const imagePaths = [  "1.png",  "2.png",  "3.png",  "4.png",  "5.png",  "6.png"];
+const imagePaths = [  "hangman1.png",  "hangman2.png",  "hangman3.png",  "hangman4.png",  "hangman5.png",  "hangman6.png"];
 
 function displayImage(currentStep) {
   const image = document.createElement('img');
