@@ -4,51 +4,39 @@ const lettersElement = document.getElementById("letters");
 const guessesElement = document.getElementById("guesses");
 const resultElement = document.getElementById("result");
 const hangmanContainer = document.getElementById("hangman-container");
+
+
 const clueElement = document.getElementById("clue");
-const startButton = document.createElement("button");
-const clueButton = document.createElement("button");
-const hintButton = document.createElement("button");
-const directionButton = document.createElement("button");
-const directionElement = document.querySelector(".directions");
+const clueButton = document.getElementById("clueButton");
+const hintButton = document.getElementById("hintButton");
+const directionButton = document.getElementById("directionButton");
 const h1Element = document.querySelector("h1");
 const h2Element = document.querySelector("h2");
 const gameContainer = document.createElement("div");
 const buttonContainer = document.getElementById("button-container") || document.createElement("div");
 
-// Style components
-clueButton.textContent = "Clue";
-clueButton.id = "clueButton";
-clueButton.style.display = "none";
-hintButton.textContent = "Hint";
-hintButton.id = "hintButton";
-hintButton.style.display = "none";
+const directionElement = document.querySelector(".directions");
+
+const startButton = document.createElement("button")
 startButton.textContent = "Start Game";
 startButton.id = "startButton";
-directionButton.id = "directionButton";
-directionButton.textContent = "Directions";
-directionButton.style.display = "none";
+h1Element.appendChild(startButton);
 
 // Assigning elements IDs & text
 clueElement.appendChild(clueButton);
 clueElement.appendChild(hintButton);
-h1Element.append(startButton);
 
-// Wrap the buttons in a <div> container
-const buttonsWrapper = document.createElement("div");
-buttonsWrapper.className = "buttons-wrapper";
-buttonsWrapper.appendChild(clueButton);
-buttonsWrapper.appendChild(hintButton);
-buttonsWrapper.appendChild(directionButton);
 
-// Append the buttons container to the button container element
-buttonContainer.id = "button-container";
-buttonContainer.appendChild(buttonsWrapper);
+// // Wrap the buttons in a <div> container
+// const buttonsWrapper = document.createElement("div");
+// buttonsWrapper.className = "buttons-wrapper";
+// buttonsWrapper.appendChild(clueButton);
+// buttonsWrapper.appendChild(hintButton);
+// buttonsWrapper.appendChild(directionButton);
 
-// Append the button container element to the directions container element
-document.querySelector(".directions-container").appendChild(buttonContainer);
-
-gameContainer.appendChild(directionButton);
-document.querySelector(".game-container").appendChild(gameContainer);
+// // Append the buttons container to the button container element
+// buttonContainer.id = "button-container";
+// buttonContainer.appendChild(buttonsWrapper);
 
 // Variables
 let word;
@@ -63,12 +51,12 @@ let currentStep = 0;
 startButton.addEventListener("click", () => {
   newGame();
   startButton.style.display = "none";
-  directionButton.style.display = "block";
+  h1Element.style.display = "none"
+  directionElement.style.display = "none";
   clueButton.style.display = "block";
   hintButton.style.display = "block";
-  directionElement.style.display = "none";
-  h1Element.style.display = "none";
 });
+
 
 clueButton.addEventListener("click", async () => {
   const wordDefinition = await getDefinition(word);
@@ -124,6 +112,8 @@ async function getDefinition(randomWord) {
 
 async function newGame() {
   resetGame();
+  clueButton.style.display = "block";
+  hintButton.style.display = "block";
   guesses = [];
   correctGuesses = [];
   wrongGuesses = [];
@@ -179,8 +169,8 @@ async function newGame() {
     });
   }
   // Show the clue and hint buttons
-  clueButton.style.display = "block";
-  hintButton.style.display = "block";
+  // clueButton.style.display = "block";
+  // hintButton.style.display = "block";
 }
 
 
@@ -222,7 +212,7 @@ function resetGame() {
   lettersElement.innerHTML = "";
   clueButton.style.display = "none";
   hintButton.style.display = "none";
-  startButton.style.display = "block";
+  startButton.style.display = "flex";
   directionButton.style.display = "none"
   directionElement.style.display = "flex"
   h1Element.style.display = "flex"
