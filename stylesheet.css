@@ -11,6 +11,8 @@
 }
 
 body {
+    background-image: url("beach-background.jpeg");
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,7 +21,6 @@ body {
     min-height: 100vh; 
     margin: 1px;
     padding: 10px;
-    border: lightgreen solid 2px;
     
 }
 
@@ -35,9 +36,10 @@ section {
   align-items: center;
   flex-direction: column;
   border: solid black 2px;
-  background-color: rgb(179, 219, 179);
   font-weight: bold;
-  font-size: 28px;
+  font-size: 25px;
+  text-align: center;
+  font-weight: bold;
 } 
 
 .game-container{
@@ -195,12 +197,13 @@ h2 {
 
 #hangman-container {
   display: flex;
-  height: 100px;
-  width: 100px;
+  height: 300px;
+  width: 300px;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
+  margin: auto;
 }
+
 
 img {
   height: auto;
