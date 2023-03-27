@@ -218,18 +218,21 @@ function endGame() {
   startButton.style.display = "block";
 }
 
-const imagePaths = [
-"https://imgur.com/M4yEtI4"
-  // Add more image paths as needed
-];
+const imagePaths = [  "waves.png",  "surfboard1.png",  "image1.png",  "image2.png",  "image3.png",  "image4.png",  "image5.png",  "image6.png"];
 
 function displayImage(currentStep) {
   const image = document.createElement('img');
-  image.src = imagePaths[currentStep];
+  if (currentStep === 1) {
+    image.src = imagePaths[0];
+  } else if (currentStep === 2) {
+    image.src = imagePaths[1];
+  } else {
+    image.src = imagePaths[currentStep];
+  }
   hangmanContainer.appendChild(image);
 }
-
 
 function drawMan(currentStep) {
   displayImage(currentStep);
 }
+
