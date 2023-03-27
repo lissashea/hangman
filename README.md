@@ -1,27 +1,51 @@
+# Hangman Game
 
-Explanation:
+This is a Hangman game built using HTML, CSS, and JavaScript. The game randomly selects a word, and the player must guess the letters to uncover the word. The player has 6 attempts to guess the word before the game ends. The player can click the "Clue" button for a hint about the word or the "Hint" button to see the part of speech of the word.
 
-The code above uses a number of variables and functions to implement the Hangman game:
+# HTML Elements
+- wordElement - The element that displays the word to be guessed
+- lettersElement - The element that displays the available letters to be guessed
+- guessesElement - The element that displays the incorrect letters guessed
+- resultElement - The element that displays the result of the game
+- hangmanContainer - The container for the hangman images
+- clueElement - The element that displays the "Clue" and "Hint" buttons
+- clueButton - The "Clue" button
+- hintButton - The "Hint" button
+- h1Element - The level 1 heading
+- h2Element - The level 2 heading
+- gameContainer - The container for the game
+- directionElement - The element that displays the game instructions
+- directionButton - The button that shows the game instructions
+- startButton - The button that starts a new game
 
-- `word`: the word to be guessed
-- `wordArray`: an array of the letters in the word
-- `guesses`: an array of all the guesses made by the player
-- `correctGuesses`: an array of the letters guessed correctly by the player
-- `wrongGuesses`: an array of the letters guessed incorrectly by the player
-- `maxWrongGuesses`: the maximum number of wrong guesses allowed before the player loses the game
-- `gameFinished`: a boolean flag indicating whether the game has finished or not
+## Variables
+- word - The word to be guessed
+- guesses - The array of letters guessed
+- correctGuesses - The array of correct letters guessed
+- wrongGuesses - The array of incorrect letters guessed
+- maxWrongGuesses - The maximum number of incorrect guesses allowed
+- gameFinished - A boolean variable that indicates whether the game has ended
+- currentStep - The current step in the hangman game
 
-The code also defines a number of DOM elements that are used to display the game to the user:
+## Event Listeners
+- startButton - Starts a new game
+- clueButton - Shows a clue about the word
+- hintButton - Shows the part of speech of the word
+- directionButton - Shows the game instructions
 
-- `wordElement`: the element that displays the word with blank spaces for unguessed letters
-- `lettersElement`: the element that displays the letter buttons that the player can click to make guesses
-- `guessesElement`: the element that displays the list of wrong guesses made by the player
-- `resultElement`: the element that displays the result of the game (win or lose)
+## Functions
+- getRandomWord() - Fetches a random word
+- addData(object) - Adds a new object to the data array
+- getDefinition(randomWord) - Fetches the definition and part of - speech of a word
+- newGame() - Starts a new game
+- showWord() - Displays the word to be guessed
+- showGuesses() - Displays the incorrect letters guessed
+- resetGame() - Resets the game
+- endGame() - Ends the game
+- drawMan(currentStep) - Draws the hangman image
+- Images
+- imagePaths - The paths to the hangman images
+- images - The hangman images
 
-The `newGame()` function is called when the page loads, and it initializes the game by prompting the player to enter a word to guess, showing the word with blank spaces for unguessed letters, and displaying the letter buttons and the list of wrong guesses. The `showWord()` function is used to update the display of the word with the correct letters that have been guessed by the player. The `showGuesses()` function is used to update the display of the list of wrong guesses made by the player. The `endGame()` function is called when the game is over, and it disables the letter buttons and displays the result of the game.
-
-The event listener for the `click` event on the `lettersElement` listens for clicks on the letter buttons. If the clicked element is a button and the game is not finished, the letter is checked to see if it is in the word. If it is, the `correctGuesses` array is updated and the display of the word is updated with the correct letter. If all the letters in the word have been guessed correctly, the game is won. If the letter is not in the word, the `wrongGuesses` array is updated and the display of the list of wrong guesses is updated. If the player has made the maximum number of wrong guesses, the game is lost.
-
-Finally, the code calls the `newGame()` function to start a new game when the page loads.
-
-Note: This implementation does not include timer-based scoring or tracking of scores across games.
+## Note
+This code is a work in progress and may be improved in the future.

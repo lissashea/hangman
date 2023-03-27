@@ -127,32 +127,6 @@ h2 {
   }
 }
 
-/* #result {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.hide {
-  display: none;
-}
-
-#result-text h2 {
-  font-size: 1.8em;
-  text-align: center;
-}
-
-#result-text p {
-  font-size: 1.25em;
-  margin: 1em 0 2em 0;
-}
-
-#result-text span {
-  font-weight: 600;
-} */
-
-
-
 #directionButton {
   padding: 10px;
   font-family: SimpleHandMade;
@@ -163,6 +137,11 @@ h2 {
   cursor: pointer;
   margin-top: 30px;
   color: grey;
+}
+
+#startButton {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #clue {

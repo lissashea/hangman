@@ -4,27 +4,27 @@ const lettersElement = document.getElementById("letters");
 const guessesElement = document.getElementById("guesses");
 const resultElement = document.getElementById("result");
 const hangmanContainer = document.getElementById("hangman-container");
-
-
 const clueElement = document.getElementById("clue");
 const clueButton = document.getElementById("clueButton");
 const hintButton = document.getElementById("hintButton");
-
 const h1Element = document.querySelector("h1");
 const h2Element = document.querySelector("h2");
 const gameContainer = document.createElement("div");
-
 const directionElement = document.querySelector(".directions");
 const directionButton = document.getElementById("directionButton");
+const startButton = document.createElement("button");
 
-const startButton = document.createElement("button")
+// Set text content for elements
 startButton.textContent = "Start Game";
-startButton.id = "startButton";
-h1Element.appendChild(startButton);
 
-// Assigning elements IDs & text
+// Assign ids to elements
+startButton.id = "startButton";
+
+// Append elements to parent nodes
+h1Element.appendChild(startButton);
 clueElement.appendChild(clueButton);
 clueElement.appendChild(hintButton);
+h1Element.appendChild(startButton);
 
 
 // Variables
@@ -47,7 +47,6 @@ startButton.addEventListener("click", () => {
   hintButton.style.display = "block";
 });
 
-
 clueButton.addEventListener("click", async () => {
   const wordDefinition = await getDefinition(word);
   alert(`Clue: ${wordDefinition.definition}`);
@@ -62,11 +61,12 @@ hintButton.addEventListener("click", async () => {
 
 directionButton.addEventListener("click", async () => {
   alert(`Guess the letters to uncover the word. You have 6 attempts to guess the word before the man is hanged.
-  Click the "Clue" button for a hint about the word. Click the "Hint" button to see the part of speech of the word.`);
+  
+Click the "Clue" button for a hint about the word. Click the "Hint" button to see the part of speech of the word.`);
   directionButton.style.display = "block";
 });
 
-
+//functions 
 async function getRandomWord(){
   console.log("Fetching random word...");
   const response = await fetch(`https://random-word-api.herokuapp.com/word`);
@@ -156,27 +156,8 @@ async function newGame() {
       }
     });
   }
-
-  // Display the underline letter placeholders
   showWord();
-  
-  // Show the clue and hint buttons
-  // clueButton.style.display = "block";
-  // hintButton.style.display = "block";
 }
-
-
-// function showWord() {
-//   let displayedWord = "";
-//   for (let i = 0; i < wordArray.length; i++) {
-//     if (correctGuesses.includes(wordArray[i])) {
-//       displayedWord += wordArray[i] + "";
-//     } else {
-//       displayedWord += " _ ";
-//     }
-//   }
-//   wordElement.innerHTML = displayedWord.trim();
-// }
 
 function showWord() {
   let displayedWord = "";
@@ -198,7 +179,6 @@ function showWord() {
   }
 }
 
-
 function showGuesses() {
   guessesElement.innerHTML = "Incorrect guesses: " + wrongGuesses.join(", ");
   if (wrongGuesses.length === 5) {
@@ -210,7 +190,6 @@ function showGuesses() {
 }
 
 function resetGame() {
-  // Reset all game variables
   word = null;
   guesses = [];
   correctGuesses = [];
@@ -220,10 +199,9 @@ function resetGame() {
   gameFinished = false;
   wordDefinition = null;
   
-  // Clear canvas
   hangmanContainer.innerHTML = "";
 
-  // Reset HTML elements
+  document.querySelector('.directions').style.display = 'none';
   guessesElement.removeAttribute("style");
   wordElement.removeAttribute("style");  
   wordElement.innerHTML = "";
@@ -236,8 +214,6 @@ function resetGame() {
   startButton.style.display = "flex";
   directionButton.style.display = "none"
   directionElement.style.display = "flex"
-
-  // Reset background color
   guessesElement.style.backgroundColor = "transparent";
   wordElement.style.backgroundColor = "transparent";
 }
@@ -277,7 +253,6 @@ const images = imagePaths.map((path) => {
 function drawMan(currentStep) {
   if (currentStep <= 6) {
     const image = images[currentStep - 1];
-    // Remove the current image, if any
     const currentImage = hangmanContainer.querySelector('img');
     if (currentImage) {
       hangmanContainer.removeChild(currentImage);
