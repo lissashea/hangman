@@ -102,8 +102,6 @@ async function getDefinition(randomWord) {
 
 async function newGame() {
   resetGame();
-  // clueButton.style.display = "block";
-  // hintButton.style.display = "block";
   guesses = [];
   correctGuesses = [];
   wrongGuesses = [];
@@ -191,7 +189,10 @@ function showWord() {
   }
   wordElement.innerHTML = displayedWord.trim();
   
-  if (correctGuesses.length > 0) {
+  if (correctGuesses.length === 0) {
+    guessesElement.style.backgroundColor = "transparent";
+    wordElement.style.backgroundColor = "transparent";
+  } else {
     guessesElement.style.backgroundColor = "rgb(255 255 255 / 45%)";
     wordElement.style.backgroundColor = "rgb(255 255 255 / 45%)";
   }
@@ -222,8 +223,9 @@ function resetGame() {
   // Clear canvas
   hangmanContainer.innerHTML = "";
 
-  
   // Reset HTML elements
+  guessesElement.removeAttribute("style");
+  wordElement.removeAttribute("style");  
   wordElement.innerHTML = "";
   guessesElement.innerHTML = "";
   resultElement.innerHTML = "";
@@ -234,6 +236,10 @@ function resetGame() {
   startButton.style.display = "flex";
   directionButton.style.display = "none"
   directionElement.style.display = "flex"
+
+  // Reset background color
+  guessesElement.style.backgroundColor = "transparent";
+  wordElement.style.backgroundColor = "transparent";
 }
 
 function endGame() {
@@ -249,25 +255,17 @@ function endGame() {
     setTimeout(() => {
       alert(resultMessage);
       resetGame();
+      guessesElement.style.backgroundColor = "transparent";
+      wordElement.style.backgroundColor = "transparent";
     }, 500); 
   } else {
     alert(resultMessage);
     resetGame();
+    guessesElement.style.backgroundColor = "transparent";
+    wordElement.style.backgroundColor = "transparent";
   }
 }
 
-// function displayImage(currentStep) {
-//   const image = document.createElement('img');
-//   image.src = imagePaths[currentStep - 1];
-
-//   // Remove the current image, if any
-//   const currentImage = hangmanContainer.querySelector('img');
-//   if (currentImage) {
-//     hangmanContainer.removeChild(currentImage);
-//   }
-
-//   hangmanContainer.appendChild(image);
-// }
 const imagePaths = [ "hangman1.png", "hangman2.png", "hangman3.png", "hangman4.png", "hangman5.png", "hangman6.png" ];
 
 const images = imagePaths.map((path) => {
@@ -287,6 +285,5 @@ function drawMan(currentStep) {
     hangmanContainer.appendChild(image);
   }
 }
-
 
 
