@@ -101,7 +101,6 @@ async function getDefinition(randomWord) {
 }
 
 async function newGame() {
-  resetGame();
   guesses = [];
   correctGuesses = [];
   wrongGuesses = [];
@@ -218,7 +217,6 @@ function resetGame() {
   guessesElement.style.backgroundColor = "transparent";
   wordElement.style.backgroundColor = "transparent";
   document.querySelector('.directions').style.display = 'none';
-
 }
 
 
