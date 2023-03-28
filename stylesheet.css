@@ -147,6 +147,7 @@ h2 {
   margin: auto;
   margin-top: -15px;
   margin-bottom: 150px;
+  display: block;
 }
 
 #clue {
@@ -168,6 +169,7 @@ h2 {
 #hintButton,
 #startButton,
 #directionButton {
+  display: block;
   font-family: SimpleHandMade;
   font-size: 18px;
   background-color: white;

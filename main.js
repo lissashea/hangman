@@ -204,6 +204,7 @@ function resetGame() {
   document.querySelector('.directions').style.display = 'none';
   guessesElement.removeAttribute("style");
   wordElement.removeAttribute("style");  
+  document.querySelector('.directions').style.display = 'none';
   wordElement.innerHTML = "";
   guessesElement.innerHTML = "";
   resultElement.innerHTML = "";
@@ -212,11 +213,12 @@ function resetGame() {
   hintButton.style.display = "none";
   h1Element.style.display = "flex"
   startButton.style.display = "flex";
-  directionButton.style.display = "none"
-  directionElement.style.display = "flex"
+  directionButton.style.display = "none";
+  directionElement.style.display = "flex";
   guessesElement.style.backgroundColor = "transparent";
   wordElement.style.backgroundColor = "transparent";
 }
+
 
 function endGame() {
   gameFinished = true;
