@@ -217,6 +217,8 @@ function resetGame() {
   directionElement.style.display = "flex";
   guessesElement.style.backgroundColor = "transparent";
   wordElement.style.backgroundColor = "transparent";
+  document.querySelector('.directions').style.display = 'none';
+
 }
 
 
@@ -262,5 +264,4 @@ function drawMan(currentStep) {
     hangmanContainer.appendChild(image);
   }
 }
-
 
