@@ -36,7 +36,7 @@ let maxWrongGuesses = 6;
 let gameFinished = false;
 let currentStep = 0;
 
-// Event listeners
+// Event listeners for my buttons
 startButton.addEventListener("click", () => {
   newGame();
   startButton.style.display = "none";
@@ -66,7 +66,7 @@ Click the "Clue" button for a hint about the word. Click the "Hint" button to se
   directionButton.style.display = "block";
 });
 
-//functions 
+//functions to run the game and my api that pulls a random word and the definition from another api
 async function getRandomWord(){
   console.log("Fetching random word...");
   const response = await fetch(`https://random-word-api.herokuapp.com/word`);
