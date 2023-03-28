@@ -11,7 +11,7 @@
 }
 
 body {
-    background-image: url("beach-background.jpeg");
+    background-image: url("./images/beach-background.jpeg");
     background-size: cover;
     display: flex;
     flex-direction: column;

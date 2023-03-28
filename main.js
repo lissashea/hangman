@@ -242,7 +242,7 @@ function endGame() {
   }
 }
 
-const imagePaths = [ "hangman1.png", "hangman2.png", "hangman3.png", "hangman4.png", "hangman5.png", "hangman6.png" ];
+const imagePaths = [ "./images/hangman1.png", "./images/hangman2.png", "./images/hangman3.png", "./images/hangman4.png", "./images/hangman5.png", "./images/hangman6.png" ];
 
 const images = imagePaths.map((path) => {
   const img = new Image();
