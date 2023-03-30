@@ -58,7 +58,8 @@ hintButton.addEventListener("click", async () => {
 });
 
 directionButton.addEventListener("click", async () => {
-  alert(`Guess the letters to uncover the word. You have 6 attempts to guess the word before the man is hanged.
+  alert(
+`Guess the letters to uncover the word. You have 6 attempts to guess the word before the man is hangin TEN.
   
 Click the "Clue" button for a hint about the word. Click the "Hint" button to see the part of speech of the word.`);
   directionButton.style.display = "block";
@@ -71,10 +72,6 @@ async function getRandomWord(){
   const data = await response.json();
   // console.log("Random word fetched:", data[0]);
   return data[0]; // return the actual word 
-}
-
-function addData(object) {
-  data.push(object)
 }
 
 async function getDefinition(randomWord) {
