@@ -122,7 +122,7 @@ async function newGame() {
 
   lettersElement.innerHTML = "";
   for (let i = 65; i <= 90; i++) {
-    const letter = String.fromCharCode(i);
+    const letter = String.fromCharCode(i);//static method UTF-16 code
     const button = document.createElement("button");
     button.textContent = letter;
     lettersElement.appendChild(button);
