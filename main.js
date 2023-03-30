@@ -38,7 +38,6 @@ let currentStep = 0;
 // Event listeners for my buttons
 startButton.addEventListener("click", () => {
   newGame();
-  startButton.style.display = "none";
   h1Element.style.display = "none"
   directionElement.style.display = "none";
   directionButton.style.display = "block"
@@ -83,8 +82,8 @@ async function getDefinition(randomWord) {
     `https://api.dictionaryapi.dev/api/v2/entries/en/${randomWord}`
   );
 
-  if (res.ok) { // Check if response is AOK 
-    const data = await res.json(); //check if word has definition 
+  if (res.ok) { // Check if response is successful
+    const data = await res.json();
     if (data.length > 0 && data[0].meanings && data[0].meanings.length > 0 && data[0].meanings[0].definitions && data[0].meanings[0].definitions.length > 0) { // Check if the data has the expected structure
       const definition = data[0].meanings[0].definitions[0].definition;
       const partOfSpeech = data[0].meanings[0].partOfSpeech;
@@ -199,10 +198,8 @@ function resetGame() {
   
   hangmanContainer.innerHTML = "";
 
-  document.querySelector('.directions').style.display = 'none';
   guessesElement.removeAttribute("style");
   wordElement.removeAttribute("style");  
-  // document.querySelector('.directions').style.display = 'none';
   wordElement.innerHTML = "";
   guessesElement.innerHTML = "";
   resultElement.innerHTML = "";
@@ -215,7 +212,7 @@ function resetGame() {
   directionElement.style.display = "flex";
   guessesElement.style.backgroundColor = "transparent";
   wordElement.style.backgroundColor = "transparent";
-  // document.querySelector('.directions').style.display = 'none';
+  document.querySelector('.directions').style.display = 'none';
 }
 
 
@@ -261,4 +258,3 @@ function drawMan(currentStep) {
     hangmanContainer.appendChild(image);
   }
 }
-
