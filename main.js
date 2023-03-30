@@ -1,4 +1,4 @@
-// HTML elements
+// HTML elements & DOM:
 const wordElement = document.getElementById("word");
 const lettersElement = document.getElementById("letters");
 const guessesElement = document.getElementById("guesses");
@@ -14,19 +14,19 @@ const directionElement = document.querySelector(".directions");
 const directionButton = document.getElementById("directionButton");
 const startButton = document.createElement("button");
 
-// Set text content for elements
+// Set text content for elements:
 startButton.textContent = "Start Game";
 
-// Assign ids to elements
+// Assign ids to elements:
 startButton.id = "startButton";
 
-// Append elements to parent nodes
+// Append elements to parent nodes:
 h1Element.appendChild(startButton);
 clueElement.appendChild(clueButton);
 clueElement.appendChild(hintButton);
 
 
-// Variables
+// Variables:
 let word;
 let guesses = [];
 let correctGuesses = [];
@@ -35,7 +35,7 @@ let maxWrongGuesses = 6;
 let gameFinished = false;
 let currentStep = 0;
 
-// Event listeners for my buttons
+// Event listeners for my buttons:
 startButton.addEventListener("click", () => {
   newGame();
   h1Element.style.display = "none"
@@ -64,7 +64,7 @@ Click the "Clue" button for a hint about the word. Click the "Hint" button to se
   directionButton.style.display = "block";
 });
 
-//functions to run the game and my api that pulls a random word and the definition from another api
+//functions to run the game add my api that pulls a random word and the definition from another api, and resetting the game:
 async function getRandomWord(){
   console.log("Fetching random word...");
   const response = await fetch(`https://random-word-api.herokuapp.com/word`);
@@ -128,7 +128,6 @@ async function newGame() {
     lettersElement.appendChild(button);
 
     button.addEventListener('click', () => {
- 
       guesses.push(button.innerHTML)
       button.classList.add('active');
       button.setAttribute('style', 'background-color: grey');
@@ -145,17 +144,17 @@ async function newGame() {
         drawMan(currentStep);
       }
     
-      showWord();
+      showLetter();
       showGuesses();
       if (currentStep === 6) {
         endGame();
       }
     });
   }
-  showWord();
+  showLetter();
 }
 
-function showWord() {
+function showLetter() {
   let displayedWord = "";
   for (let i = 0; i < wordArray.length; i++) {
     if (correctGuesses.includes(wordArray[i])) {
@@ -197,7 +196,6 @@ function endGame() {
       : "You lost. Sadly our surfer stick will now be drunk surfing and thats extremely dangerous! The word was " + word + ".";
   
   drawMan(currentStep);
-  
   if (currentStep === 6) {
     setTimeout(() => {
       alert(resultMessage);
