@@ -70,7 +70,7 @@ async function getRandomWord(){
   const response = await fetch(`https://random-word-api.herokuapp.com/word`);
   const data = await response.json();
   // console.log("Random word fetched:", data[0]);
-  return data[0]; // return the actual word
+  return data[0]; // return the actual word 
 }
 
 function addData(object) {
@@ -84,7 +84,7 @@ async function getDefinition(randomWord) {
 
   if (res.ok) { // Check if response is successful
     const data = await res.json();
-    if (data.length > 0 && data[0].meanings && data[0].meanings.length > 0 && data[0].meanings[0].definitions && data[0].meanings[0].definitions.length > 0) { // Check if the data has the expected structure
+    if (data.length > 0 && data[0].meanings && data[0].meanings.length > 0 && data[0].meanings[0].definitions && data[0].meanings[0].definitions.length > 0) { // Check if the data has the expected structure for the word -> definition
       const definition = data[0].meanings[0].definitions[0].definition;
       const partOfSpeech = data[0].meanings[0].partOfSpeech;
 
@@ -105,6 +105,7 @@ async function newGame() {
   currentStep = 0;
   gameFinished = false;
   let randomWord = "";
+  //while loop to run until it finds a word that fits my conditions
   while (true) {
     randomWord = await getRandomWord();
     console.log(randomWord);
@@ -127,9 +128,7 @@ async function newGame() {
     lettersElement.appendChild(button);
 
     button.addEventListener('click', () => {
-      if (gameFinished) {
-        return;
-      }
+ 
       guesses.push(button.innerHTML)
       button.classList.add('active');
       button.setAttribute('style', 'background-color: grey');
@@ -187,34 +186,8 @@ function showGuesses() {
 }
 
 function resetGame() {
-  word = null;
-  guesses = [];
-  correctGuesses = [];
-  wrongGuesses = [];
-  maxWrongGuesses = 6;
-  currentStep = 0;
-  gameFinished = false;
-  wordDefinition = null;
-  
-  hangmanContainer.innerHTML = "";
-
-  guessesElement.removeAttribute("style");
-  wordElement.removeAttribute("style");  
-  wordElement.innerHTML = "";
-  guessesElement.innerHTML = "";
-  resultElement.innerHTML = "";
-  lettersElement.innerHTML = "";
-  clueButton.style.display = "none";
-  hintButton.style.display = "none";
-  h1Element.style.display = "flex"
-  startButton.style.display = "flex";
-  directionButton.style.display = "none";
-  directionElement.style.display = "flex";
-  guessesElement.style.backgroundColor = "transparent";
-  wordElement.style.backgroundColor = "transparent";
-  document.querySelector('.directions').style.display = 'none';
+  window.location.reload();
 }
-
 
 function endGame() {
   gameFinished = true;
