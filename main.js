@@ -131,6 +131,8 @@ async function newGame() {
       guesses.push(button.innerHTML)
       button.classList.add('active');
       button.setAttribute('style', 'background-color: grey');
+      button.style.cursor = "none"; 
+      button.setAttribute("disabled", "true");
       const selectedLetter = button.innerHTML.toLowerCase();
       if (wordArray.includes(selectedLetter)) {
         for (let i = 0; i < wordArray.length; i++) {
