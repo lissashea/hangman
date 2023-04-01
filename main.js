@@ -192,37 +192,7 @@ function showGuesses() {
   }
 }
 
-// function resetGame() {
-//   if (gameFinished) {
-//     directionElement.style.display = "none";
-//   }
-//   window.location.reload();
-// }
-
-function resetGame() {
-  h1Element.style.display = "block";
-  lettersElement.style.display = "none";
-  clueButton.style.display = "none";
-  hintButton.style.display = "none";
-  directionButton.style.display = "none";
-  guesses = [];
-  correctGuesses = [];
-  wrongGuesses = [];
-  currentStep = 0;
-  gameFinished = false;
-  word = "";
-  wordArray = [];
-
-  wordElement.innerHTML = "";
-  guessesElement.innerHTML = "";
-  hangmanContainer.innerHTML = "";
-  lettersElement.innerHTML = "";
-
-  directionElement.style.display = "none";
-
-  // newGame();
-}
-
+//"draw or display image of hangman"
 function drawMan(currentStep) {
   if (currentStep <= 6) {
     const image = images[currentStep - 1];
@@ -234,6 +204,7 @@ function drawMan(currentStep) {
   }
 }
 
+//end game win or lose
 function endGame() {
   gameFinished = true;
   const resultMessage =
@@ -255,6 +226,7 @@ function endGame() {
   }
 }
 
+//image generation
 const imagePaths = [ "./images/hangman1.png", "./images/hangman2.png", "./images/hangman3.png", "./images/hangman4.png", "./images/hangman5.png", "./images/hangman6.png" ];
 
 const images = imagePaths.map((path) => {
@@ -263,3 +235,24 @@ const images = imagePaths.map((path) => {
   return img;
 });
 
+function resetGame() {
+  h1Element.style.display = "block";
+  lettersElement.style.display = "none";
+  clueButton.style.display = "none";
+  hintButton.style.display = "none";
+  directionButton.style.display = "none";
+  guesses = [];
+  correctGuesses = [];
+  wrongGuesses = [];
+  currentStep = 0;
+  gameFinished = false;
+  word = "";
+  wordArray = [];
+
+  wordElement.innerHTML = "";
+  guessesElement.innerHTML = "";
+  hangmanContainer.innerHTML = "";
+  lettersElement.innerHTML = "";
+
+  directionElement.style.display = "none";
+}
