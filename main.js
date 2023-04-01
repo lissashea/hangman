@@ -37,7 +37,6 @@ let currentStep = 0;
 
 // Event listeners for my buttons:
 startButton.addEventListener("click", () => {
-  newGame();
   h1Element.style.display = "none"
   directionElement.style.display = "none";
   directionButton.style.display = "block"
@@ -100,6 +99,7 @@ async function getDefinition(randomWord) {
 }
 
 async function newGame() {
+  lettersElement.style.display = "block"
   guesses = [];
   correctGuesses = [];
   wrongGuesses = [];
@@ -201,6 +201,10 @@ function showGuesses() {
 
 function resetGame() {
   h1Element.style.display = "block";
+  lettersElement.style.display = "none";
+  clueButton.style.display = "none";
+  hintButton.style.display = "none";
+  directionButton.style.display = "none";
   guesses = [];
   correctGuesses = [];
   wrongGuesses = [];
@@ -212,6 +216,7 @@ function resetGame() {
   wordElement.innerHTML = "";
   guessesElement.innerHTML = "";
   hangmanContainer.innerHTML = "";
+  lettersElement.innerHTML = "";
 
   directionElement.style.display = "none";
 
