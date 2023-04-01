@@ -43,6 +43,7 @@ startButton.addEventListener("click", () => {
   directionButton.style.display = "block"
   clueButton.style.display = "block";
   hintButton.style.display = "block";
+  newGame();
 });
 
 clueButton.addEventListener("click", async () => {
@@ -58,8 +59,7 @@ hintButton.addEventListener("click", async () => {
 });
 
 directionButton.addEventListener("click", async () => {
-  alert(
-`Guess the letters to uncover the word. You have 6 attempts to guess the word before the man is hangin TEN.
+  alert(`Guess the letters to uncover the word. You have 6 attempts to guess the word before the man is hanged.
   
 Click the "Clue" button for a hint about the word. Click the "Hint" button to see the part of speech of the word.`);
   directionButton.style.display = "block";
@@ -72,6 +72,10 @@ async function getRandomWord(){
   const data = await response.json();
   // console.log("Random word fetched:", data[0]);
   return data[0]; // return the actual word 
+}
+
+function addData(object) {
+  data.push(object)
 }
 
 async function getDefinition(randomWord) {
@@ -145,12 +149,17 @@ async function newGame() {
     
       showLetter();
       showGuesses();
+      if (correctGuesses.length === wordArray.length)  {
+        console.log("correct you won!")
+        endGame()
+      }
       if (currentStep === 6) {
         endGame();
       }
     });
   }
   showLetter();
+  directionElement.style.display = "none"; // Hide the directions element
 }
 
 function showLetter() {
@@ -183,40 +192,31 @@ function showGuesses() {
   }
 }
 
+// function resetGame() {
+//   if (gameFinished) {
+//     directionElement.style.display = "none";
+//   }
+//   window.location.reload();
+// }
+
 function resetGame() {
-  window.location.reload();
+  h1Element.style.display = "block";
+  guesses = [];
+  correctGuesses = [];
+  wrongGuesses = [];
+  currentStep = 0;
+  gameFinished = false;
+  word = "";
+  wordArray = [];
+
+  wordElement.innerHTML = "";
+  guessesElement.innerHTML = "";
+  hangmanContainer.innerHTML = "";
+
+  directionElement.style.display = "none";
+
+  // newGame();
 }
-
-function endGame() {
-  gameFinished = true;
-  const resultMessage =
-    correctGuesses.length === wordArray.length
-      ? "You won! Great Job"
-      : "You lost. Sadly our surfer stick will now be drunk surfing and thats extremely dangerous! The word was " + word + ".";
-  
-  drawMan(currentStep);
-  if (currentStep === 6) {
-    setTimeout(() => {
-      alert(resultMessage);
-      resetGame();
-      guessesElement.style.backgroundColor = "transparent";
-      wordElement.style.backgroundColor = "transparent";
-    }, 500); 
-  } else {
-    alert(resultMessage);
-    resetGame();
-    guessesElement.style.backgroundColor = "transparent";
-    wordElement.style.backgroundColor = "transparent";
-  }
-}
-
-const imagePaths = [ "./images/hangman1.png", "./images/hangman2.png", "./images/hangman3.png", "./images/hangman4.png", "./images/hangman5.png", "./images/hangman6.png" ];
-
-const images = imagePaths.map((path) => {
-  const img = new Image();
-  img.src = path;
-  return img;
-});
 
 function drawMan(currentStep) {
   if (currentStep <= 6) {
@@ -228,3 +228,33 @@ function drawMan(currentStep) {
     hangmanContainer.appendChild(image);
   }
 }
+
+function endGame() {
+  gameFinished = true;
+  const resultMessage =
+    correctGuesses.length === wordArray.length
+      ? "You won! Great Job!"
+      : "You lost. Sadly our surfer stick will now be drunk surfing and that's extremely dangerous! The word was " + word + ".";
+      
+  if (!gameFinished && currentStep < 6) {
+    drawMan(currentStep);
+  }
+  
+  if (gameFinished || correctGuesses.length === wordArray.length || currentStep === 6) {
+    setTimeout(() => {
+      alert(resultMessage);
+      resetGame();
+      guessesElement.style.backgroundColor = "transparent";
+      wordElement.style.backgroundColor = "transparent";
+    }, 500); 
+  }
+}
+
+const imagePaths = [ "./images/hangman1.png", "./images/hangman2.png", "./images/hangman3.png", "./images/hangman4.png", "./images/hangman5.png", "./images/hangman6.png" ];
+
+const images = imagePaths.map((path) => {
+  const img = new Image();
+  img.src = path;
+  return img;
+});
+
